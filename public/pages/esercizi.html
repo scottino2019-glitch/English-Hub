@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Esercizi di Grammatica &amp; Cloze Test — English Hub</title>
+    <meta
+      name="description"
+      content="Allenati su condizionali, inversione, phrasal verbs e verbi modali inglesi con feedback immediato e audio."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body data-page="esercizi">
+    <div class="page-shell">
+      <div class="page-container">
+        <header id="site-header" class="site-header"></header>
+
+        <section class="subpage-banner">
+          <div>
+            <div class="meta-line">
+              <a href="/" style="text-decoration: underline;">← Torna alla Homepage</a>
+              <span aria-hidden="true">·</span>
+              <span>Laboratorio Grammatica Inglese</span>
+            </div>
+            <h1 style="font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; margin-top: 0.5rem;">
+              Esercizi Cloze &amp; Strutture B2–C1
+            </h1>
+            <p style="color: #d1fae5; max-width: 56ch; margin-top: 0.375rem;">
+              Seleziona una categoria grammaticale, completa la frase e ascolta la pronuncia corretta dell’intera proposizione.
+            </p>
+          </div>
+          <div id="cloze-category-tabs" class="segmented-bar" role="tablist" aria-label="Categorie grammaticali"></div>
+        </section>
+
+        <main class="subpage-grid">
+          <section class="bento-card card-emerald">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Completa la Frase</h2>
+                <p id="cloze-meta" class="card-subtitle">Condizionali · Livello C1</p>
+              </div>
+              <button type="button" id="cloze-listen-btn" class="btn-audio-icon">
+                Ascolta Frase Completa
+              </button>
+            </div>
+
+            <div id="cloze-sentence" class="cloze-sentence"></div>
+
+            <div id="cloze-options" class="options-grid options-grid--3"></div>
+
+            <div id="cloze-feedback" class="feedback-box feedback-box--emerald"></div>
+
+            <div style="display: flex; justify-content: flex-end;">
+              <button type="button" id="cloze-next-btn" class="btn btn-primary">
+                Esercizio Successivo →
+              </button>
+            </div>
+          </section>
+
+          <aside class="bento-card card-white">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Indice delle Regole</h2>
+                <p class="card-subtitle">Formule chiave presenti negli esercizi</p>
+              </div>
+            </div>
+            <div id="grammar-rules-summary"></div>
+          </aside>
+        </main>
+
+        <footer id="site-footer" class="site-footer"></footer>
+      </div>
+    </div>
+
+    <script defer src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dialoghi Reali nel Regno Unito — English Hub</title>
+    <meta
+      name="description"
+      content="Simulazioni di conversazione reale in inglese britannico: caffetteria a Soho, metropolitana di Londra e seminario a Oxford."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body data-page="dialogo">
+    <div class="page-shell">
+      <div class="page-container">
+        <header id="site-header" class="site-header"></header>
+
+        <section class="subpage-banner">
+          <div>
+            <div class="meta-line">
+              <a href="/" style="text-decoration: underline;">← Torna alla Homepage</a>
+              <span aria-hidden="true">·</span>
+              <span>Conversazione Situazionale</span>
+            </div>
+            <h1 style="font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; margin-top: 0.5rem;">
+              Dialoghi Reali in Inglese
+            </h1>
+            <p style="color: #d1fae5; max-width: 56ch; margin-top: 0.375rem;">
+              Scegli uno scenario quotidiano, ascolta ogni battuta singolarmente e scopri le formule di cortesia britanniche.
+            </p>
+          </div>
+          <div id="dialogue-scenario-tabs" class="segmented-bar" role="tablist" aria-label="Scegli scenario di dialogo"></div>
+        </section>
+
+        <main class="subpage-grid">
+          <section class="bento-card card-slate">
+            <div class="card-header">
+              <div>
+                <h2 id="dialogue-title" class="card-title">At a Coffee Shop in Soho</h2>
+                <p id="dialogue-meta" class="card-subtitle">Ordinare a Londra · Livello B1</p>
+              </div>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <button type="button" id="dialogue-toggle-it" class="btn btn-white">
+                  Nascondi Traduzione
+                </button>
+                <button type="button" id="dialogue-play-all" class="btn btn-amber">
+                  Ascolta Tutto il Dialogo
+                </button>
+              </div>
+            </div>
+
+            <div id="dialogue-turns-list" class="dialogue-list"></div>
+          </section>
+
+          <aside class="bento-card card-white">
+            <div class="media-frame media-frame--wide">
+              <img
+                id="dialogue-scene-img"
+                src="/assets/images/london-coffee-shop.jpg"
+                alt="Interno di caffetteria londinese"
+                referrerpolicy="no-referrer"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="image-fallback" style="display: none;">
+                <span>Scenario UK</span>
+              </div>
+              <div id="dialogue-scene-caption" class="media-caption-scrim">Soho · Londra</div>
+            </div>
+
+            <div class="feedback-box">
+              <strong style="display: block; margin-bottom: 0.25rem;">Nota di Galateo Linguistico</strong>
+              <span id="dialogue-etiquette-tip"></span>
+            </div>
+          </aside>
+        </main>
+
+        <footer id="site-footer" class="site-footer"></footer>
+      </div>
+    </div>
+
+    <script defer src="/app.js"></script>
+  </body>
+</html>

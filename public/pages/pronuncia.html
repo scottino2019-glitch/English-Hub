@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio Pronuncia IPA — English Hub</title>
+    <meta
+      name="description"
+      content="Confronta la trascrizione fonetica IPA britannica (UK RP) e americana (US GA) con ascolto lento e normale."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body data-page="pronuncia">
+    <div class="page-shell">
+      <div class="page-container">
+        <header id="site-header" class="site-header"></header>
+
+        <section class="subpage-banner">
+          <div>
+            <div class="meta-line">
+              <a href="/" style="text-decoration: underline;">← Torna alla Homepage</a>
+              <span aria-hidden="true">·</span>
+              <span>Fonetica Inglese &amp; Accenti</span>
+            </div>
+            <h1 style="font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; margin-top: 0.5rem;">
+              Laboratorio Pronuncia IPA
+            </h1>
+            <p style="color: #d1fae5; max-width: 56ch; margin-top: 0.375rem;">
+              Confronta la pronuncia Received Pronunciation (UK) e General American (US) regolando la velocità di ascolto.
+            </p>
+          </div>
+          <div id="pronuncia-word-tabs" class="segmented-bar" role="tablist" aria-label="Seleziona parola"></div>
+        </section>
+
+        <main class="subpage-grid">
+          <section class="bento-card card-dark">
+            <div class="card-header">
+              <div>
+                <h2 id="pronuncia-word-title" style="font-size: 2rem; font-weight: 800; color: #ffffff;">Thoroughly</h2>
+                <p class="card-subtitle" style="color: var(--ink-on-dark-muted);">Analisi fonetica comparata</p>
+              </div>
+              <div id="pronuncia-rate-bar" class="segmented-bar segmented-bar--dark">
+                <button type="button" class="segmented-btn" data-rate="0.75">0.75x Lento</button>
+                <button type="button" class="segmented-btn is-active" data-rate="1.0">1.0x Normale</button>
+              </div>
+            </div>
+
+            <div class="subpage-grid--balanced">
+              <div style="background: var(--surface-dark-elevated); padding: 1rem; border-radius: var(--radius-inner); border: 1px solid rgba(248, 250, 252, 0.14);">
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-cyan);">UK Received Pronunciation</div>
+                <div id="pronuncia-uk-ipa" style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; margin-top: 0.375rem;">
+                  /ˈθʌr.ə.li/
+                </div>
+                <button type="button" id="pronuncia-play-uk" class="btn-audio-icon" style="margin-top: 0.75rem;">
+                  Ascolta UK (en-GB)
+                </button>
+              </div>
+
+              <div style="background: var(--surface-dark-elevated); padding: 1rem; border-radius: var(--radius-inner); border: 1px solid rgba(248, 250, 252, 0.14);">
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-amber);">US General American</div>
+                <div id="pronuncia-us-ipa" style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; margin-top: 0.375rem;">
+                  /ˈθɝː.oʊ.li/
+                </div>
+                <button type="button" id="pronuncia-play-us" class="btn-audio-icon" style="margin-top: 0.75rem;">
+                  Ascolta US (en-US)
+                </button>
+              </div>
+            </div>
+
+            <div id="pronuncia-waveform" class="waveform-bar" aria-hidden="true">
+              <span class="wave-stick" style="height: 8px;"></span>
+              <span class="wave-stick" style="height: 15px;"></span>
+              <span class="wave-stick" style="height: 20px;"></span>
+              <span class="wave-stick" style="height: 11px;"></span>
+              <span class="wave-stick" style="height: 18px;"></span>
+              <span class="wave-stick" style="height: 13px;"></span>
+              <span class="wave-stick" style="height: 17px;"></span>
+              <span class="wave-stick" style="height: 9px;"></span>
+            </div>
+          </section>
+
+          <aside class="bento-card card-white">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Guida Articolatoria</h2>
+                <p class="card-subtitle">Dettagli e frase d’esempio</p>
+              </div>
+            </div>
+            <p id="pronuncia-note" style="font-size: 0.9375rem; line-height: 1.6; color: var(--ink-secondary);"></p>
+            <div class="feedback-box">
+              <strong>Esempio nel contesto:</strong>
+              <p id="pronuncia-example" style="margin-top: 0.25rem; font-style: italic;"></p>
+            </div>
+          </aside>
+        </main>
+
+        <footer id="site-footer" class="site-footer"></footer>
+      </div>
+    </div>
+
+    <script defer src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+================================================================================
+GUIDA RAPIDA & ESEMPI — ENGLISH HUB
+================================================================================
+
+Questo progetto usa solo HTML, CSS e JavaScript puro (niente React).
+Tutti i file condivisi e le sottopagine si trovano nella cartella "public"
+e usano link assoluti (/style.css, /app.js, /pages/..., /assets/...).
+
+--------------------------------------------------------------------------------
+1. DOVE MODIFICARE COSA
+--------------------------------------------------------------------------------
+
+- index.html
+  La Homepage con la griglia Bento. Qui puoi togliere, spostare o aggiungere
+  le card dentro <main class="bento-grid"> ... </main>.
+
+- public/style.css
+  Unico foglio di stile per tutto il sito (variabili colore, sfondo UK,
+  header, griglia Bento, card, bottoni, footer).
+
+- public/app.js
+  Unico script per tutto il sito:
+  * Sezione 1: SITE_CONFIG (menu di navigazione, bottone CTA, footer)
+  * Sezione 2: Contenuti (frasi Hero, quiz, esercizi cloze, dialoghi, flashcard)
+  * Sezione 3: Sintesi vocale inglese (Web Speech API)
+  * Sezione 4: Generazione automatica Header e Footer su tutte le pagine
+  * Sezione 5: Logica interattiva delle singole pagine
+
+- public/pages/*.html
+  Le pagine separate del sito:
+  * /pages/quiz.html
+  * /pages/esercizi.html
+  * /pages/dialogo.html
+  * /pages/cultura.html
+  * /pages/pronuncia.html
+
+- public/assets/images/
+  Le immagini locali usate dal sito.
+
+--------------------------------------------------------------------------------
+2. COME TOGLIERE UNA CARD DALLA HOMEPAGE
+--------------------------------------------------------------------------------
+
+1. Apri il file "index.html".
+2. Individua il blocco <article class="bento-card ...">...</article> oppure
+   <section class="bento-card ...">...</section> che vuoi eliminare.
+3. Cancella tutto il blocco da <article>/<section> fino alla sua chiusura.
+4. Salva: la griglia usa "grid-auto-flow: dense", quindi si riadatta da sola
+   senza lasciare spazi vuoti, e "public/app.js" ignora senza errori gli
+   elementi rimossi.
+
+--------------------------------------------------------------------------------
+3. CLASSI PRONTE PER LE NUOVE CARD
+--------------------------------------------------------------------------------
+
+Ogni card nella griglia deve avere:
+  class="bento-card [COLORE] [DIMENSIONE]"
+
+COLORI DISPONIBILI:
+- card-white    -> Sfondo bianco, testo scuro
+- card-slate    -> Sfondo grigio chiarissimo, testo scuro
+- card-amber    -> Sfondo giallo crema caldo, testo scuro
+- card-emerald  -> Sfondo verde menta chiaro, testo scuro
+- card-rose     -> Sfondo rosa chiaro, testo scuro
+- card-dark     -> Sfondo blu notte (#0f172a), testo chiaro
+
+DIMENSIONI DISPONIBILI (su desktop 4 colonne):
+- span-1x1      -> Card piccola (1 colonna x 1 riga)
+- span-2x1      -> Card media larga (2 colonne x 1 riga)
+- span-2x2      -> Card grande quadrata (2 colonne x 2 righe)
+- span-4x1      -> Card a tutta larghezza (4 colonne x 1 riga)
+
+--------------------------------------------------------------------------------
+4. ESEMPI PRONTI DA COPIARE IN index.html (DENTRO <main class="bento-grid">)
+--------------------------------------------------------------------------------
+
+--- ESEMPIO A: Card semplice 1x1 ---
+
+<article class="bento-card card-white span-1x1">
+  <div>
+    <div class="meta-line">
+      <span>Vocabolario</span>
+      <span aria-hidden="true">·</span>
+      <span>Livello B1</span>
+    </div>
+    <h2 class="card-title" style="margin-top: 0.5rem;">Titolo Nuova Card</h2>
+    <p class="card-subtitle">Breve testo esplicativo per questa sezione.</p>
+  </div>
+  <a href="/pages/esercizi.html" class="card-link-action">Vai agli Esercizi →</a>
+</article>
+
+
+--- ESEMPIO B: Card larga 2x1 con bottone audio ---
+
+<article class="bento-card card-amber span-2x1">
+  <div class="card-header">
+    <div>
+      <h2 class="card-title">Espressione Utile del Giorno</h2>
+      <p class="card-subtitle">Inglese quotidiano · Livello B2</p>
+    </div>
+    <a href="/pages/dialogo.html" class="card-link-action">Dialoghi →</a>
+  </div>
+  <p style="font-size: 1rem; font-weight: 700;">
+    “To break the ice” — Rompere il ghiaccio all’inizio di una conversazione.
+  </p>
+</article>
+
+
+--- ESEMPIO C: Card con immagine locale (con fallback automatico) ---
+
+<article class="bento-card card-white span-1x1">
+  <div class="media-frame">
+    <img
+      src="/assets/images/oxford-library.jpg"
+      alt="Biblioteca storica di Oxford"
+      referrerpolicy="no-referrer"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    <div class="image-fallback" style="display: none;">
+      <span>Oxford Study Hall</span>
+    </div>
+    <div class="media-caption-scrim">Oxford · Regno Unito</div>
+  </div>
+  <div>
+    <h2 class="card-title">Studio Accademico</h2>
+    <p class="card-subtitle">Risorse per livello C1-C2.</p>
+  </div>
+</article>
+
+
+--- ESEMPIO D: Banner orizzontale a tutta larghezza (span-4x1) ---
+
+<section class="bento-card card-dark span-4x1">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+    <div>
+      <h2 class="card-title" style="font-size: 1.25rem;">Nuova Sezione Speciale</h2>
+      <p class="card-subtitle" style="color: var(--ink-on-dark-muted);">
+        Occupa tutta la larghezza della griglia su desktop.
+      </p>
+    </div>
+    <a href="/pages/quiz.html" class="btn btn-amber">Inizia Ora →</a>
+  </div>
+</section>
+
+--------------------------------------------------------------------------------
+5. COME AGGIUNGERE UNA NUOVA PAGINA E METTERLA NEL MENU
+--------------------------------------------------------------------------------
+
+Passo 1 — Crea la nuova pagina HTML copiando la struttura base in "public/pages/":
+Esempio file: public/pages/verbi.html
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verbi Irregolari — English Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body data-page="verbi">
+    <div class="page-shell">
+      <div class="page-container">
+        <header id="site-header" class="site-header"></header>
+
+        <section class="subpage-banner">
+          <div>
+            <div class="meta-line">
+              <a href="/" style="text-decoration: underline;">← Torna alla Homepage</a>
+            </div>
+            <h1 style="font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; margin-top: 0.5rem;">
+              Verbi Irregolari
+            </h1>
+          </div>
+        </section>
+
+        <main class="subpage-grid--balanced">
+          <article class="bento-card card-white">
+            <h2 class="card-title">Contenuto della nuova pagina</h2>
+            <p class="card-subtitle">Scrivi qui tabelle, esempi o esercizi.</p>
+          </article>
+        </main>
+
+        <footer id="site-footer" class="site-footer"></footer>
+      </div>
+    </div>
+
+    <script defer src="/app.js"></script>
+  </body>
+</html>
+
+Passo 2 — Aggiungi il link nel menu (in UN SOLO posto):
+Apri "public/app.js", trova SITE_CONFIG -> navLinks e aggiungi la riga:
+
+  { label: 'Verbi', href: '/pages/verbi.html' },
+
+Automaticamente il link apparirà nell'header di TUTTE le pagine del sito!
+Se vuoi aggiungerlo anche nel footer, inseriscilo in SITE_CONFIG -> footer -> links.
+
+--------------------------------------------------------------------------------
+6. COME CAMBIARE COLORI E FONT DI TUTTO IL SITO
+--------------------------------------------------------------------------------
+
+Apri "public/style.css" e modifica le variabili dentro ":root { ... }"
+all'inizio del file (es. --bg-canvas, --accent-emerald, --accent-amber,
+--font-sans, --radius-card). Il cambiamento si applica a tutte le pagine.
+================================================================================

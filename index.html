@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Hub — Studio Interattivo per la Lingua Inglese</title>
+    <meta
+      name="description"
+      content="Piattaforma modulare per lo studio della lingua inglese con laboratorio di frasi, quiz, esercizi grammaticali, dialoghi reali e pronuncia IPA."
+    />
+    <meta property="og:title" content="English Hub — Studio Interattivo per la Lingua Inglese" />
+    <meta
+      property="og:description"
+      content="Piattaforma modulare per lo studio della lingua inglese con laboratorio di frasi, quiz, esercizi grammaticali, dialoghi reali e pronuncia IPA."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Foglio CSS unico nella cartella public con link assoluto -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body data-page="home">
+    <div class="page-shell">
+      <div class="page-container">
+        <!-- 1. HEADER MODULARE CONDIVISO -->
+        <header id="site-header" class="site-header">
+          <div class="header-bar">
+            <a href="/" class="brand-wordmark">
+              <span class="brand-mark" aria-hidden="true">🇬🇧</span>
+              <span>English Hub</span>
+            </a>
+            <nav class="header-nav" aria-label="Navigazione principale">
+              <a href="/" class="nav-link is-active" aria-current="page">Studio</a>
+              <a href="/pages/quiz.html" class="nav-link">Quiz</a>
+              <a href="/pages/esercizi.html" class="nav-link">Esercizi</a>
+              <a href="/pages/dialogo.html" class="nav-link">Dialogo</a>
+              <a href="/pages/cultura.html" class="nav-link">Cultura</a>
+            </nav>
+            <div class="header-actions">
+              <a href="/pages/quiz.html" class="btn btn-primary">Inizia Quiz</a>
+            </div>
+          </div>
+        </header>
+
+        <!-- 2. GRIGLIA BENTO PRINCIPALE -->
+        <main class="bento-grid">
+          <!-- A. HERO INTERATTIVO STUDIO INGLESE (2x2) -->
+          <section id="hero-lab" class="hero-lab span-2x2" aria-labelledby="hero-title">
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div class="meta-line">
+                <span class="hero-kicker">English Class · Interactive Language Lab</span>
+                <span aria-hidden="true">·</span>
+                <span>Audio britannico attivo</span>
+              </div>
+
+              <h1 id="hero-title" class="hero-headline">
+                Padroneggia ogni sfumatura dell’inglese, dal primo saluto al livello madrelingua.
+              </h1>
+
+              <p class="hero-lead">
+                Esercizi contestuali, trascrizioni fonetiche IPA e schede di grammatica viva per pensare direttamente in inglese.
+              </p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div id="hero-phrase-tabs" class="phrase-tabs" role="tablist" aria-label="Seleziona categoria di frase"></div>
+
+              <div class="hero-phrase-box">
+                <div id="hero-phrase-en" class="hero-phrase-en">
+                  Good morning! It is a pleasure to finally meet you in person.
+                </div>
+                <div id="hero-phrase-ipa" class="hero-phrase-ipa">
+                  /ɡʊd ˈmɔː.nɪŋ/ · Livello B1-B2
+                </div>
+                <div id="hero-phrase-it" class="hero-phrase-it">
+                  Buongiorno! È un piacere conoscerti finalmente di persona.
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-footer">
+              <div style="display: flex; align-items: center; gap: 0.625rem; flex-wrap: wrap;">
+                <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: #d1fae5;">
+                  LIVELLO:
+                </span>
+                <div id="hero-level-switcher" class="level-switcher" role="group" aria-label="Livello CEFR">
+                  <button type="button" class="level-btn" data-level="A1-A2">A1-A2</button>
+                  <button type="button" class="level-btn is-active" data-level="B1-B2">B1-B2</button>
+                  <button type="button" class="level-btn" data-level="C1-C2">C1-C2</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 0.625rem; flex-wrap: wrap;">
+                <button type="button" id="hero-speak-btn" class="btn btn-ghost-dark">
+                  Ascolta Pronuncia
+                </button>
+                <a href="/pages/esercizi.html" class="btn btn-white">
+                  Inizia Pratica →
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- B. CARTOLINA CULTURALE LONDRA (1x1) -->
+          <article class="bento-card card-white span-1x1">
+            <div>
+              <div class="meta-line" style="margin-bottom: 0.5rem;">
+                <span>Kensington · London</span>
+                <span aria-hidden="true">·</span>
+                <a href="/pages/cultura.html" style="color: var(--accent-emerald-strong); font-weight: 700;">Cultura →</a>
+              </div>
+              <div class="media-frame">
+                <img
+                  src="/assets/images/london-mews.jpg"
+                  alt="Vicolo acciottolato di Kensington Mews a Londra con cabina telefonica rossa"
+                  referrerpolicy="no-referrer"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="image-fallback" style="display: none;">
+                  <span>Kensington Mews</span>
+                  <span style="font-family: var(--font-mono); font-size: 0.75rem;">London · SW7</span>
+                </div>
+                <div class="media-caption-scrim">Kensington Mews · SW7</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 0.75rem;">
+              <div>
+                <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+                  <h2 class="card-title">Mews</h2>
+                  <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-indigo); font-weight: 700;">/mjuːz/</span>
+                </div>
+                <p style="font-size: 0.8125rem; color: var(--ink-muted); margin-top: 0.125rem;">
+                  Vicolo londinese con antiche scuderie riconvertite in case.
+                </p>
+              </div>
+              <button type="button" id="postcard-audio-btn" class="btn-audio-icon" aria-label="Ascolta pronuncia di Kensington Mews">
+                🔊
+              </button>
+            </div>
+          </article>
+
+          <!-- C. PAROLA DEL GIORNO FLASHCARD (1x1) -->
+          <article class="bento-card card-amber span-1x1">
+            <div>
+              <div class="meta-line" style="justify-content: space-between;">
+                <span id="flashcard-meta">Cultura &amp; Lessico · Livello C1</span>
+                <button type="button" id="flashcard-audio-btn" class="btn-audio-icon" aria-label="Ascolta parola del giorno">
+                  🔊
+                </button>
+              </div>
+
+              <div style="margin-top: 0.875rem;">
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-amber-ink); margin-bottom: 0.25rem;">
+                  Parola del Giorno
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
+                  <h2 id="flashcard-word" style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;">Serendipity</h2>
+                  <span id="flashcard-ipa" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-muted);">/ˌser.ənˈdɪp.ə.ti/</span>
+                </div>
+                <p id="flashcard-meaning" style="font-size: 0.875rem; color: var(--ink-secondary); margin-top: 0.5rem; line-height: 1.45;">
+                  La fortuna di fare scoperte felici e inattese per puro caso.
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid rgba(120, 53, 15, 0.18);">
+              <button type="button" id="flashcard-next-btn" class="btn-audio-icon" style="background: #ffffff;">
+                Prossima parola
+              </button>
+              <a href="/pages/cultura.html#flashcards" class="card-link-action">
+                Tutte le schede →
+              </a>
+            </div>
+          </article>
+
+          <!-- D. QUIZ VOCABOLARIO RAPIDO (2x2) -->
+          <section id="quiz" class="bento-card card-white span-2x2" aria-labelledby="home-quiz-title">
+            <div class="card-header">
+              <div>
+                <h2 id="home-quiz-title" class="card-title">Quiz Vocabolario Rapido</h2>
+                <p id="home-quiz-counter" class="card-subtitle tabular-nums">Quesito 01 / 06 · Livello C1</p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <span id="home-quiz-xp" class="tabular-nums" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--accent-emerald-strong);">
+                  0 XP guadagnati
+                </span>
+                <a href="/pages/quiz.html" class="card-link-action">Apri Quiz Completo →</a>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+              <p id="home-quiz-prompt" style="font-size: 1.0625rem; font-weight: 800; line-height: 1.4;">
+                Cosa significa l’aggettivo inglese “Ubiquitous”?
+              </p>
+              <div id="home-quiz-options" class="options-grid options-grid--2"></div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div id="home-quiz-feedback" class="feedback-box"></div>
+              <div style="display: flex; justify-content: flex-end;">
+                <button type="button" id="home-quiz-next" class="btn btn-amber">
+                  Prossima domanda →
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- E. ESERCIZIO COMPLETA LA FRASE / CLOZE TEST (2x2) -->
+          <section id="esercizi" class="bento-card card-emerald span-2x2" aria-labelledby="home-cloze-title">
+            <div class="card-header">
+              <div>
+                <h2 id="home-cloze-title" class="card-title">Completa la Frase (Cloze Test)</h2>
+                <p id="home-cloze-meta" class="card-subtitle">Condizionali · Livello C1</p>
+              </div>
+              <a href="/pages/esercizi.html" class="card-link-action">Tutti gli Esercizi →</a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+              <div id="home-cloze-sentence" class="cloze-sentence"></div>
+              <div id="home-cloze-options" class="options-grid options-grid--3"></div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div id="home-cloze-feedback" class="feedback-box feedback-box--emerald"></div>
+              <div style="display: flex; justify-content: flex-end;">
+                <button type="button" id="home-cloze-next" class="btn btn-primary">
+                  Esercizio successivo →
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- F. DIALOGO SITUAZIONALE A LONDRA (2x2) -->
+          <section id="dialogo" class="bento-card card-slate span-2x2" aria-labelledby="home-dialogue-title">
+            <div class="card-header">
+              <div>
+                <h2 id="home-dialogue-title" class="card-title">Dialogo Reale: At a Coffee Shop in Soho</h2>
+                <p class="card-subtitle">Inglese britannico pratico · Ordinare con naturalezza</p>
+              </div>
+              <a href="/pages/dialogo.html" class="card-link-action">Altri Dialoghi →</a>
+            </div>
+
+            <div class="dialogue-list">
+              <div class="dialogue-turn">
+                <span class="speaker-avatar">Tu</span>
+                <div class="dialogue-bubble">
+                  <p class="dialogue-en">
+                    “Morning! Could I grab a flat white to have in, and one of those warm fruit scones, please?”
+                  </p>
+                  <p class="dialogue-it">
+                    “Buongiorno! Potrei avere un flat white da bere qui e uno di quegli scone caldi alla frutta, per favore?”
+                  </p>
+                </div>
+              </div>
+
+              <div class="dialogue-turn">
+                <span class="speaker-avatar speaker-avatar--alt">Bar</span>
+                <div class="dialogue-bubble dialogue-bubble--alt">
+                  <p class="dialogue-en">
+                    “Of course! Would you like clotted cream and strawberry jam with the scone?”
+                  </p>
+                  <p class="dialogue-it">
+                    “Certamente! Desidera panna rappresa e marmellata di fragole con lo scone?”
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="feedback-box" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
+              <p style="font-size: 0.8125rem; max-width: 44ch;">
+                <strong>Galateo UK:</strong> evita l’imperativo diretto; inizia sempre con <em>“Could I have...”</em> seguito da <em>“please”</em>.
+              </p>
+              <button type="button" id="home-dialogue-audio" class="btn btn-amber">
+                Ascolta Dialogo
+              </button>
+            </div>
+          </section>
+
+          <!-- G. LABORATORIO PRONUNCIA IPA (1x1) -->
+          <article id="audio" class="bento-card card-dark span-1x1">
+            <div>
+              <div class="meta-line" style="justify-content: space-between;">
+                <span style="font-family: var(--font-mono); color: var(--accent-cyan);">Pronuncia Lab IPA</span>
+                <a href="/pages/pronuncia.html" class="card-link-action" style="min-height: auto;">Guida →</a>
+              </div>
+
+              <div style="margin-top: 0.75rem;">
+                <h2 id="home-ipa-word" style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">“Thoroughly”</h2>
+                <div id="home-ipa-code" style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--accent-cyan); margin-top: 0.125rem;">
+                  /ˈθʌr.ə.li/ · UK RP
+                </div>
+
+                <div id="home-waveform" class="waveform-bar" style="margin-top: 0.75rem;" aria-hidden="true">
+                  <span class="wave-stick" style="height: 8px;"></span>
+                  <span class="wave-stick" style="height: 14px;"></span>
+                  <span class="wave-stick" style="height: 18px;"></span>
+                  <span class="wave-stick" style="height: 10px;"></span>
+                  <span class="wave-stick" style="height: 16px;"></span>
+                  <span class="wave-stick" style="height: 12px;"></span>
+                  <span class="wave-stick" style="height: 15px;"></span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid rgba(248, 250, 252, 0.14);">
+              <button type="button" id="home-ipa-play" class="btn-audio-icon">
+                Ascolta Audio
+              </button>
+              <div style="display: flex; align-items: center; gap: 0.375rem;">
+                <button type="button" id="home-ipa-speed" class="btn-audio-icon" title="Cambia velocità">
+                  1.0x
+                </button>
+                <button type="button" id="home-ipa-next" class="btn-audio-icon" title="Prossima parola">
+                  →
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- H. TRAPPOLA DEI FALSI AMICI EN <-> IT (1x1) -->
+          <article id="falsi-amici" class="bento-card card-rose span-1x1">
+            <div>
+              <div class="meta-line" style="justify-content: space-between;">
+                <span style="color: #9f1239;">Falsi Amici · EN ⇄ IT</span>
+                <a href="/pages/cultura.html#false-friends" class="card-link-action" style="color: #be123c; min-height: auto;">
+                  Lista →
+                </a>
+              </div>
+
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-top: 0.625rem;">
+                <h2 id="home-ff-word" style="font-family: var(--font-mono); font-size: 1.0625rem; font-weight: 800;">“Actually”</h2>
+                <span id="home-ff-wrong" style="font-size: 0.8125rem; font-weight: 800; color: #be123c;">≠ Attualmente</span>
+              </div>
+
+              <div class="false-friend-box" style="margin-top: 0.625rem;">
+                <div>
+                  <strong style="color: #be123c;">✕ Non:</strong>
+                  <span id="home-ff-wrong-meaning">Adesso / In questo periodo</span>
+                </div>
+                <div>
+                  <strong style="color: #047857;">✓ Ma:</strong>
+                  <strong id="home-ff-right-meaning">In realtà / A dire il vero</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-top: 0.625rem; border-top: 1px solid #fecdd3;">
+              <p id="home-ff-tip" style="font-size: 0.75rem; color: #881337; font-weight: 600;">
+                Per dire “attualmente” usa Currently o Nowadays.
+              </p>
+              <button type="button" id="home-ff-next" class="btn-audio-icon" style="background: #ffffff; flex-shrink: 0;" title="Prossimo falso amico">
+                →
+              </button>
+            </div>
+          </article>
+        </main>
+
+        <!-- 3. FOOTER MODULARE CONDIVISO -->
+        <footer id="site-footer" class="site-footer"></footer>
+      </div>
+    </div>
+
+    <script defer src="/app.js"></script>
+  </body>
+</html>

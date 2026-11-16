@@ -1,0 +1,6 @@
+{
+  "name": "English Hub",
+  "description": "Piattaforma modulare per lo studio della lingua inglese con laboratorio di frasi, quiz, esercizi grammaticali, dialoghi reali e pronuncia IPA.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
