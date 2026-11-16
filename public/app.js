@@ -1,43 +1,12 @@
 /* ==========================================================================
    ENGLISH HUB — SCRIPT UNICO (/app.js)
-   Modifica questo unico file per gestire menu, contenuti ed esercizi:
-   1. Configurazione Menu & Footer (link assoluti)
-   2. Contenuti (Frasi, Quiz, Cloze, Dialoghi, Flashcard, Falsi Amici, IPA)
-   3. Sintesi Vocale (Web Speech API)
-   4. Header & Footer Condivisi
-   5. Inizializzazione delle singole pagine
+   Questo file gestisce SOLO la parte interattiva (frasi, quiz, cloze, audio)
+   e NON sovrascrive l'HTML di header e footer: puoi modificare l'HTML
+   liberamente senza rompere il menu o gli altri componenti.
    ========================================================================== */
 
 (() => {
-  /* === 1. CONFIGURAZIONE MENU & FOOTER === */
-  const SITE_CONFIG = {
-    brandName: 'English Hub',
-    brandHomeUrl: '/',
-    primaryCta: { label: 'Inizia Quiz', href: '/pages/quiz.html' },
-    navLinks: [
-      { label: 'Studio', href: '/' },
-      { label: 'Quiz', href: '/pages/quiz.html' },
-      { label: 'Esercizi', href: '/pages/esercizi.html' },
-      { label: 'Dialogo', href: '/pages/dialogo.html' },
-      { label: 'Cultura', href: '/pages/cultura.html' },
-    ],
-    footer: {
-      title: 'Parla inglese con sicurezza, ogni giorno.',
-      subtitle: 'Percorsi chiari per vocabolario, grammatica avanzata, dialoghi reali e pronuncia IPA.',
-      ctaLabel: 'Esplora Pronuncia IPA',
-      ctaHref: '/pages/pronuncia.html',
-      links: [
-        { label: 'Homepage Studio', href: '/' },
-        { label: 'Quiz Vocabolario', href: '/pages/quiz.html' },
-        { label: 'Esercizi Cloze', href: '/pages/esercizi.html' },
-        { label: 'Dialoghi Reali', href: '/pages/dialogo.html' },
-        { label: 'Cultura & False Friends', href: '/pages/cultura.html' },
-        { label: 'Laboratorio IPA', href: '/pages/pronuncia.html' },
-      ],
-    },
-  };
-
-  /* === 2. CONTENUTI DIDATTICI === */
+  /* === 1. CONTENUTI DIDATTICI === */
   const HERO_PHRASES = [
     {
       label: 'Saluto',
@@ -271,75 +240,24 @@
     window.speechSynthesis.speak(utterance);
   }
 
-  /* === 4. HEADER & FOOTER CONDIVISI === */
-  function normalizePath(pathname) {
-    return !pathname || pathname === '/index.html' ? '/' : pathname;
+  /* === 3. MENU MOBILE OPZIONALE (NON SOVRASCRIVE L'HTML) === */
+  function initMobileMenu() {
+    const toggleBtn = document.querySelector('.mobile-menu-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    if (!toggleBtn || !drawer) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('is-open');
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      toggleBtn.textContent = isOpen ? '✕' : '☰';
+    });
   }
 
-  function initSiteChrome() {
-    const currentPath = normalizePath(window.location.pathname);
-
-    const headerHost = document.getElementById('site-header');
-    if (headerHost) {
-      const navHtml = SITE_CONFIG.navLinks
-        .map((item) => {
-          const active = currentPath === normalizePath(item.href);
-          return `<a href="${item.href}" class="nav-link${active ? ' is-active' : ''}"${active ? ' aria-current="page"' : ''}>${item.label}</a>`;
-        })
-        .join('');
-
-      const mobileHtml = SITE_CONFIG.navLinks
-        .map((item) => {
-          const active = currentPath === normalizePath(item.href);
-          return `<a href="${item.href}" class="mobile-nav-link${active ? ' is-active' : ''}"${active ? ' aria-current="page"' : ''}><span>${item.label}</span><span aria-hidden="true">→</span></a>`;
-        })
-        .join('');
-
-      headerHost.innerHTML = `
-        <div class="header-bar">
-          <a href="${SITE_CONFIG.brandHomeUrl}" class="brand-wordmark">
-            <span class="brand-mark" aria-hidden="true">🇬🇧</span>
-            <span>${SITE_CONFIG.brandName}</span>
-          </a>
-          <nav class="header-nav" aria-label="Navigazione principale">${navHtml}</nav>
-          <div class="header-actions">
-            <a href="${SITE_CONFIG.primaryCta.href}" class="btn btn-primary">${SITE_CONFIG.primaryCta.label}</a>
-            <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-nav-drawer" aria-label="Apri menu">☰</button>
-          </div>
-        </div>
-        <nav id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Navigazione mobile">
-          ${mobileHtml}
-          <a href="/pages/pronuncia.html" class="mobile-nav-link${currentPath === '/pages/pronuncia.html' ? ' is-active' : ''}">
-            <span>Pronuncia IPA</span><span aria-hidden="true">→</span>
-          </a>
-        </nav>
-      `;
-
-      const toggleBtn = headerHost.querySelector('.mobile-menu-toggle');
-      const drawer = headerHost.querySelector('#mobile-nav-drawer');
-      if (toggleBtn && drawer) {
-        toggleBtn.addEventListener('click', () => {
-          const isOpen = drawer.classList.toggle('is-open');
-          toggleBtn.setAttribute('aria-expanded', String(isOpen));
-          toggleBtn.textContent = isOpen ? '✕' : '☰';
-        });
-      }
-    }
-
-    const footerHost = document.getElementById('site-footer');
-    if (footerHost) {
-      const linksHtml = SITE_CONFIG.footer.links
-        .map((link) => `<a href="${link.href}">${link.label}</a>`)
-        .join('');
-
-      footerHost.innerHTML = `
-        <div>
-          <h3 style="font-size: 1.375rem; font-weight: 800; letter-spacing: -0.02em; color: #0f172a;">${SITE_CONFIG.footer.title}</h3>
-          <p style="font-size: 0.875rem; font-weight: 600; color: #064e3b; margin-top: 0.25rem; max-width: 58ch;">${SITE_CONFIG.footer.subtitle}</p>
-          <div class="footer-links" style="margin-top: 1rem;">${linksHtml}</div>
-        </div>
-        <a href="${SITE_CONFIG.footer.ctaHref}" class="btn btn-primary" style="box-shadow: var(--shadow-offset-light);">${SITE_CONFIG.footer.ctaLabel}</a>
-      `;
+  function safeRun(fn) {
+    try {
+      fn();
+    } catch (err) {
+      console.warn('English Hub widget warning:', err);
     }
   }
 
@@ -955,13 +873,13 @@
 
   /* === AVVIO AUTOMATICO PER PAGINA === */
   document.addEventListener('DOMContentLoaded', () => {
-    initSiteChrome();
+    safeRun(initMobileMenu);
     const page = document.body.dataset.page || 'home';
-    if (page === 'home') initHomePage();
-    else if (page === 'quiz') initQuizPage();
-    else if (page === 'esercizi') initEserciziPage();
-    else if (page === 'dialogo') initDialogoPage();
-    else if (page === 'cultura') initCulturaPage();
-    else if (page === 'pronuncia') initPronunciaPage();
+    if (page === 'home') safeRun(initHomePage);
+    else if (page === 'quiz') safeRun(initQuizPage);
+    else if (page === 'esercizi') safeRun(initEserciziPage);
+    else if (page === 'dialogo') safeRun(initDialogoPage);
+    else if (page === 'cultura') safeRun(initCulturaPage);
+    else if (page === 'pronuncia') safeRun(initPronunciaPage);
   });
 })();

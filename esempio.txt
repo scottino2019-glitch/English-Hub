@@ -19,15 +19,13 @@ e usano link assoluti (/style.css, /app.js, /pages/..., /assets/...).
   header, griglia Bento, card, bottoni, footer).
 
 - public/app.js
-  Unico script per tutto il sito:
-  * Sezione 1: SITE_CONFIG (menu di navigazione, bottone CTA, footer)
-  * Sezione 2: Contenuti (frasi Hero, quiz, esercizi cloze, dialoghi, flashcard)
-  * Sezione 3: Sintesi vocale inglese (Web Speech API)
-  * Sezione 4: Generazione automatica Header e Footer su tutte le pagine
-  * Sezione 5: Logica interattiva delle singole pagine
+  Unico script per tutto il sito. Gestisce SOLO le parti interattive
+  (frasi, quiz, cloze, dialoghi, pronuncia, menu mobile) e NON sovrascrive
+  l'HTML di header e footer: puoi modificare qualsiasi tag HTML nelle pagine
+  senza rompere il menu o gli altri blocchi.
 
 - public/pages/*.html
-  Le pagine separate del sito:
+  Le pagine separate del sito (ognuna con header e footer HTML diretti):
   * /pages/quiz.html
   * /pages/esercizi.html
   * /pages/dialogo.html
@@ -90,7 +88,7 @@ DIMENSIONI DISPONIBILI (su desktop 4 colonne):
 </article>
 
 
---- ESEMPIO B: Card larga 2x1 con bottone audio ---
+--- ESEMPIO B: Card larga 2x1 ---
 
 <article class="bento-card card-amber span-2x1">
   <div class="card-header">
@@ -143,64 +141,17 @@ DIMENSIONI DISPONIBILI (su desktop 4 colonne):
 </section>
 
 --------------------------------------------------------------------------------
-5. COME AGGIUNGERE UNA NUOVA PAGINA E METTERLA NEL MENU
+5. COME MODIFICARE IL MENU O AGGIUNGERE UNA NUOVA PAGINA
 --------------------------------------------------------------------------------
 
-Passo 1 — Crea la nuova pagina HTML copiando la struttura base in "public/pages/":
-Esempio file: public/pages/verbi.html
+Header e footer sono scritti direttamente in HTML dentro ogni pagina:
+puoi aggiungere, togliere o rinominare un link <a href="..." class="nav-link">
+direttamente nell'HTML senza dipendere da JavaScript.
 
-<!doctype html>
-<html lang="it">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verbi Irregolari — English Hub</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body data-page="verbi">
-    <div class="page-shell">
-      <div class="page-container">
-        <header id="site-header" class="site-header"></header>
-
-        <section class="subpage-banner">
-          <div>
-            <div class="meta-line">
-              <a href="/" style="text-decoration: underline;">← Torna alla Homepage</a>
-            </div>
-            <h1 style="font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; margin-top: 0.5rem;">
-              Verbi Irregolari
-            </h1>
-          </div>
-        </section>
-
-        <main class="subpage-grid--balanced">
-          <article class="bento-card card-white">
-            <h2 class="card-title">Contenuto della nuova pagina</h2>
-            <p class="card-subtitle">Scrivi qui tabelle, esempi o esercizi.</p>
-          </article>
-        </main>
-
-        <footer id="site-footer" class="site-footer"></footer>
-      </div>
-    </div>
-
-    <script defer src="/app.js"></script>
-  </body>
-</html>
-
-Passo 2 — Aggiungi il link nel menu (in UN SOLO posto):
-Apri "public/app.js", trova SITE_CONFIG -> navLinks e aggiungi la riga:
-
-  { label: 'Verbi', href: '/pages/verbi.html' },
-
-Automaticamente il link apparirà nell'header di TUTTE le pagine del sito!
-Se vuoi aggiungerlo anche nel footer, inseriscilo in SITE_CONFIG -> footer -> links.
+Per creare una nuova pagina in "public/pages/" (es. public/pages/verbi.html),
+copia la struttura di una pagina esistente (es. "public/pages/cultura.html")
+e aggiungi il link <a href="/pages/verbi.html" class="nav-link">Verbi</a>
+nell'header delle pagine dove vuoi mostrarlo.
 
 --------------------------------------------------------------------------------
 6. COME CAMBIARE COLORI E FONT DI TUTTO IL SITO

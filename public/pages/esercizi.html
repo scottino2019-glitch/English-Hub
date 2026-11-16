@@ -21,7 +21,30 @@
   <body data-page="esercizi">
     <div class="page-shell">
       <div class="page-container">
-        <header id="site-header" class="site-header"></header>
+        <header class="site-header">
+          <div class="header-bar">
+            <a href="/" class="brand-wordmark">
+              <span class="brand-mark" aria-hidden="true">🇬🇧</span>
+              <span>English Hub</span>
+            </a>
+            <nav class="header-nav" aria-label="Navigazione principale">
+              <a href="/" class="nav-link">Studio</a>
+              <a href="/pages/quiz.html" class="nav-link">Quiz</a>
+              <a href="/pages/esercizi.html" class="nav-link is-active" aria-current="page">Esercizi</a>
+              <a href="/pages/dialogo.html" class="nav-link">Dialogo</a>
+              <a href="/pages/cultura.html" class="nav-link">Cultura</a>
+            </nav>
+            <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-nav-drawer" aria-label="Apri menu">☰</button>
+          </div>
+          <nav id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Navigazione mobile">
+            <a href="/" class="mobile-nav-link"><span>Studio</span><span aria-hidden="true">→</span></a>
+            <a href="/pages/quiz.html" class="mobile-nav-link"><span>Quiz</span><span aria-hidden="true">→</span></a>
+            <a href="/pages/esercizi.html" class="mobile-nav-link is-active" aria-current="page"><span>Esercizi</span><span aria-hidden="true">→</span></a>
+            <a href="/pages/dialogo.html" class="mobile-nav-link"><span>Dialogo</span><span aria-hidden="true">→</span></a>
+            <a href="/pages/cultura.html" class="mobile-nav-link"><span>Cultura</span><span aria-hidden="true">→</span></a>
+            <a href="/pages/pronuncia.html" class="mobile-nav-link"><span>Pronuncia IPA</span><span aria-hidden="true">→</span></a>
+          </nav>
+        </header>
 
         <section class="subpage-banner">
           <div>
@@ -76,7 +99,21 @@
           </aside>
         </main>
 
-        <footer id="site-footer" class="site-footer"></footer>
+        <footer class="site-footer">
+          <div>
+            <h3 style="font-size: 1.375rem; font-weight: 800; letter-spacing: -0.02em; color: #0f172a;">Parla inglese con sicurezza, ogni giorno.</h3>
+            <p style="font-size: 0.875rem; font-weight: 600; color: #064e3b; margin-top: 0.25rem; max-width: 58ch;">Percorsi chiari per vocabolario, grammatica avanzata, dialoghi reali e pronuncia IPA.</p>
+            <div class="footer-links" style="margin-top: 1rem;">
+              <a href="/">Homepage Studio</a>
+              <a href="/pages/quiz.html">Quiz Vocabolario</a>
+              <a href="/pages/esercizi.html">Esercizi Cloze</a>
+              <a href="/pages/dialogo.html">Dialoghi Reali</a>
+              <a href="/pages/cultura.html">Cultura &amp; False Friends</a>
+              <a href="/pages/pronuncia.html">Laboratorio IPA</a>
+            </div>
+          </div>
+          <a href="/pages/pronuncia.html" class="btn btn-primary" style="box-shadow: var(--shadow-offset-light);">Esplora Pronuncia IPA</a>
+        </footer>
       </div>
     </div>
 

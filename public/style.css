@@ -224,7 +224,7 @@ h1, h2, h3 {
   gap: 1.5rem;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 720px) {
   .header-nav {
     display: flex;
   }
@@ -288,7 +288,7 @@ h1, h2, h3 {
   font-weight: 700;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 720px) {
   .mobile-menu-toggle {
     display: none;
   }
@@ -311,7 +311,7 @@ h1, h2, h3 {
   display: flex;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 720px) {
   .mobile-nav-drawer,
   .mobile-nav-drawer.is-open {
     display: none;
