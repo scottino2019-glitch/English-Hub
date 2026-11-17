@@ -188,17 +188,18 @@
           </article>
 
           <!-- D. QUIZ VOCABOLARIO RAPIDO (2x2) -->
-          <section id="quiz" class="bento-card card-white span-2x2" aria-labelledby="home-quiz-title">
+          <section id="quiz" class="bento-card card-quiz-exam span-2x2" aria-labelledby="home-quiz-title">
             <div class="card-header">
               <div>
+                <span class="quiz-ribbon-tag">QUIZ TIME · +XP</span>
                 <h2 id="home-quiz-title" class="card-title">Quiz Vocabolario Rapido</h2>
                 <p id="home-quiz-counter" class="card-subtitle tabular-nums">Quesito 01 / 06 · Livello C1</p>
               </div>
               <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span id="home-quiz-xp" class="tabular-nums" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--accent-emerald-strong);">
+                <span id="home-quiz-xp" class="tabular-nums" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: #4338ca;">
                   0 XP guadagnati
                 </span>
-                <a href="/pages/quiz.html" class="card-link-action">Apri Quiz Completo →</a>
+                <a href="/pages/quiz.html" class="card-link-action" style="color: #4f46e5;">Apri Quiz Completo →</a>
               </div>
             </div>
 
@@ -220,9 +221,10 @@
           </section>
 
           <!-- E. ESERCIZIO COMPLETA LA FRASE / CLOZE TEST (2x2) -->
-          <section id="esercizi" class="bento-card card-emerald span-2x2" aria-labelledby="home-cloze-title">
+          <section id="esercizi" class="bento-card card-cloze-notebook span-2x2" aria-labelledby="home-cloze-title">
             <div class="card-header">
               <div>
+                <span class="notebook-stamp-tag">✎ GRAMMAR NOTEBOOK</span>
                 <h2 id="home-cloze-title" class="card-title">Completa la Frase (Cloze Test)</h2>
                 <p id="home-cloze-meta" class="card-subtitle">Condizionali · Livello C1</p>
               </div>
@@ -245,48 +247,63 @@
           </section>
 
           <!-- F. DIALOGO SITUAZIONALE A LONDRA (2x2) -->
-          <section id="dialogo" class="bento-card card-slate span-2x2" aria-labelledby="home-dialogue-title">
-            <div class="card-header">
-              <div>
-                <h2 id="home-dialogue-title" class="card-title">Dialogo Reale: At a Coffee Shop in Soho</h2>
-                <p class="card-subtitle">Inglese britannico pratico · Ordinare con naturalezza</p>
-              </div>
-              <a href="/pages/dialogo.html" class="card-link-action">Altri Dialoghi →</a>
-            </div>
-
-            <div class="dialogue-list">
-              <div class="dialogue-turn">
-                <span class="speaker-avatar">Tu</span>
-                <div class="dialogue-bubble">
-                  <p class="dialogue-en">
-                    “Morning! Could I grab a flat white to have in, and one of those warm fruit scones, please?”
-                  </p>
-                  <p class="dialogue-it">
-                    “Buongiorno! Potrei avere un flat white da bere qui e uno di quegli scone caldi alla frutta, per favore?”
+          <section id="dialogo" class="bento-card card-dialogue-chat span-2x2" aria-labelledby="home-dialogue-title">
+            <div class="chat-window-bar">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div class="chat-window-dots" aria-hidden="true">
+                  <span style="background: #f43f5e;"></span>
+                  <span style="background: #fbbf24;"></span>
+                  <span style="background: #10b981;"></span>
+                </div>
+                <div>
+                  <h2 id="home-dialogue-title" class="card-title" style="color: #ffffff; font-size: 0.9375rem;">
+                    💬 At a Coffee Shop in Soho
+                  </h2>
+                  <p style="font-family: var(--font-mono); font-size: 0.6875rem; color: #94a3b8;">
+                    ● LIVE CONVERSATION · INGLESE BRITANNICO
                   </p>
                 </div>
               </div>
-
-              <div class="dialogue-turn">
-                <span class="speaker-avatar speaker-avatar--alt">Bar</span>
-                <div class="dialogue-bubble dialogue-bubble--alt">
-                  <p class="dialogue-en">
-                    “Of course! Would you like clotted cream and strawberry jam with the scone?”
-                  </p>
-                  <p class="dialogue-it">
-                    “Certamente! Desidera panna rappresa e marmellata di fragole con lo scone?”
-                  </p>
-                </div>
-              </div>
+              <a href="/pages/dialogo.html" class="card-link-action" style="color: #93c5fd; min-height: auto;">
+                Altri Dialoghi →
+              </a>
             </div>
 
-            <div class="feedback-box" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
-              <p style="font-size: 0.8125rem; max-width: 44ch;">
-                <strong>Galateo UK:</strong> evita l’imperativo diretto; inizia sempre con <em>“Could I have...”</em> seguito da <em>“please”</em>.
-              </p>
-              <button type="button" id="home-dialogue-audio" class="btn btn-amber">
-                Ascolta Dialogo
-              </button>
+            <div class="chat-window-body">
+              <div class="dialogue-list">
+                <div class="dialogue-turn">
+                  <span class="speaker-avatar">Tu</span>
+                  <div class="dialogue-bubble">
+                    <p class="dialogue-en">
+                      “Morning! Could I grab a flat white to have in, and one of those warm fruit scones, please?”
+                    </p>
+                    <p class="dialogue-it">
+                      “Buongiorno! Potrei avere un flat white da bere qui e uno di quegli scone caldi alla frutta, per favore?”
+                    </p>
+                  </div>
+                </div>
+
+                <div class="dialogue-turn">
+                  <span class="speaker-avatar speaker-avatar--alt">Bar</span>
+                  <div class="dialogue-bubble dialogue-bubble--alt">
+                    <p class="dialogue-en">
+                      “Of course! Would you like clotted cream and strawberry jam with the scone?”
+                    </p>
+                    <p class="dialogue-it">
+                      “Certamente! Desidera panna rappresa e marmellata di fragole con lo scone?”
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="feedback-box" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; background: #ffffff; border-color: #c7d2fe;">
+                <p style="font-size: 0.8125rem; max-width: 44ch;">
+                  <strong>Galateo UK:</strong> evita l’imperativo diretto; inizia sempre con <em>“Could I have...”</em> seguito da <em>“please”</em>.
+                </p>
+                <button type="button" id="home-dialogue-audio" class="btn btn-amber">
+                  Ascolta Dialogo
+                </button>
+              </div>
             </div>
           </section>
 
@@ -331,24 +348,26 @@
             </div>
           </article>
 
-          <!-- H. TRAPPOLA DEI FALSI AMICI EN <-> IT (1x1) -->
-          <article id="falsi-amici" class="bento-card card-rose span-1x1">
+          <!-- H. POST-IT GIALLO CON SPILLA: FALSI AMICI EN <-> IT (1x1) -->
+          <article id="falsi-amici" class="card-postit span-1x1">
+            <div class="postit-pin" aria-hidden="true">📌</div>
+
             <div>
-              <div class="meta-line" style="justify-content: space-between;">
-                <span style="color: #9f1239;">Falsi Amici · EN ⇄ IT</span>
-                <a href="/pages/cultura.html#false-friends" class="card-link-action" style="color: #be123c; min-height: auto;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.25rem;">
+                <span class="postit-badge">FALSI AMICI</span>
+                <a href="/pages/cultura.html#false-friends" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; color: #78350f;">
                   Lista →
                 </a>
               </div>
 
               <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-top: 0.625rem;">
                 <h2 id="home-ff-word" style="font-family: var(--font-mono); font-size: 1.0625rem; font-weight: 800;">“Actually”</h2>
-                <span id="home-ff-wrong" style="font-size: 0.8125rem; font-weight: 800; color: #be123c;">≠ Attualmente</span>
+                <span id="home-ff-wrong" style="font-size: 0.75rem; font-weight: 800; color: #b91c1c;">≠ Attualmente</span>
               </div>
 
-              <div class="false-friend-box" style="margin-top: 0.625rem;">
+              <div class="postit-note-box" style="margin-top: 0.5rem;">
                 <div>
-                  <strong style="color: #be123c;">✕ Non:</strong>
+                  <strong style="color: #b91c1c;">✕ Non:</strong>
                   <span id="home-ff-wrong-meaning">Adesso / In questo periodo</span>
                 </div>
                 <div>
@@ -358,11 +377,11 @@
               </div>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-top: 0.625rem; border-top: 1px solid #fecdd3;">
-              <p id="home-ff-tip" style="font-size: 0.75rem; color: #881337; font-weight: 600;">
-                Per dire “attualmente” usa Currently o Nowadays.
-              </p>
-              <button type="button" id="home-ff-next" class="btn-audio-icon" style="background: #ffffff; flex-shrink: 0;" title="Prossimo falso amico">
+            <div class="postit-footer">
+              <span id="home-ff-tip" style="font-size: 0.75rem; line-height: 1.35;">
+                Usa Currently o Nowadays.
+              </span>
+              <button type="button" id="home-ff-next" class="btn-audio-icon" style="background: #ffffff; min-width: 36px; min-height: 36px; flex-shrink: 0;" title="Prossimo falso amico">
                 →
               </button>
             </div>
@@ -568,66 +587,75 @@
             </div>
           </section>
 
-          <!-- J. CARD LINK AL BLOG (2x1) -->
-          <!-- Sostituisci href="/pages/cultura.html" con l'URL del tuo blog -->
-          <article class="bento-card card-white span-2x1">
-            <div>
-              <div class="meta-line">
-                <span>English Journal &amp; Blog</span>
-                <span aria-hidden="true">·</span>
-                <span>Articoli Settimanali</span>
-                <span aria-hidden="true">·</span>
-                <span>5 min di lettura</span>
+          <!-- J. ANTEPRIMA ARTICOLO BLOG (2x1) -->
+          <!-- Sostituisci href="/pages/cultura.html" con il link diretto al tuo articolo del blog -->
+          <article class="card-blog-preview span-2x1">
+            <div class="blog-preview-topbar">
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <span class="blog-kicker">BLOG · ARTICOLO</span>
+                <span style="font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 700; color: #475569;">
+                  METODO &amp; FLUENCY
+                </span>
               </div>
-
-              <h2 class="card-title" style="font-size: 1.375rem; margin-top: 0.75rem;">
-                Come pensare direttamente in inglese senza tradurre parola per parola
-              </h2>
-
-              <p style="font-size: 0.9375rem; color: var(--ink-secondary); margin-top: 0.5rem; line-height: 1.55;">
-                Strategie pratiche di lettura immersiva, blocchi lessicali ad alta frequenza e piccoli rituali quotidiani per acquisire naturalezza.
-              </p>
+              <span style="font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 700; color: #64748b;">
+                5 min lettura
+              </span>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.875rem; border-top: 1px solid var(--border-subtle); flex-wrap: wrap;">
-              <span style="font-size: 0.8125rem; font-weight: 600; color: var(--ink-muted);">
-                Nuovi approfondimenti su cultura, idiomi e pronuncia
+            <div class="blog-preview-body">
+              <a href="/pages/cultura.html" class="blog-preview-thumb" aria-label="Leggi l'articolo del blog">
+                <img
+                  src="/assets/images/oxford-library.jpg"
+                  alt="Anteprima articolo del blog sulla lingua inglese"
+                  referrerpolicy="no-referrer"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="image-fallback" style="display: none;">
+                  <span>English Journal</span>
+                </div>
+              </a>
+
+              <div>
+                <h2 class="blog-preview-headline">
+                  Come pensare direttamente in inglese senza tradurre parola per parola
+                </h2>
+                <p class="blog-preview-excerpt">
+                  «Smettere di tradurre mentalmente inizia dai blocchi lessicali ad alta frequenza: ecco tre abitudini pratiche per pensare subito in inglese ogni mattina...»
+                </p>
+              </div>
+            </div>
+
+            <div class="blog-preview-footer">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: #475569;">
+                Di Redazione English Hub · Cultura &amp; Metodo
               </span>
-              <a href="/pages/cultura.html" class="btn btn-amber">
-                Vai al Blog →
+              <a href="/pages/cultura.html" class="btn btn-amber" style="min-height: 36px; padding: 0.375rem 0.875rem;">
+                Leggi l’articolo →
               </a>
             </div>
           </article>
 
-          <!-- K. CARD POLAROID PICCOLA CON FOTO, DESCRIZIONE E BOTTONCINO (1x1) -->
+          <!-- K. POLAROID VINTAGE CON BORDO BIANCO E SPILLA (1x1) -->
           <article class="polaroid-card span-1x1">
+            <div class="polaroid-header">
+              <span class="polaroid-tag">POLAROID #600</span>
+              <span style="font-size: 0.9375rem;" aria-hidden="true">📍</span>
+            </div>
+
             <div class="polaroid-photo">
               <img
-                src="/assets/images/oxford-library.jpg"
-                alt="Biblioteca storica di Oxford con libri aperti"
+                src="/assets/images/london-mews.jpg"
+                alt="Scatto Polaroid da Kensington Mews a Londra"
                 referrerpolicy="no-referrer"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               />
               <div class="image-fallback" style="display: none;">
-                <span>Oxford Study Hall</span>
+                <span>London Snapshot</span>
               </div>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-              <div>
-                <h2 class="card-title" style="font-size: 1rem;">Soho &amp; Oxford Notes</h2>
-                <p style="font-size: 0.8125rem; color: var(--ink-muted); margin-top: 0.25rem; line-height: 1.4;">
-                  Una foto al giorno con una frase autentica da ascoltare e memorizzare.
-                </p>
-              </div>
-              <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
-                <button type="button" id="polaroid-audio-btn" class="btn-audio-icon" style="min-height: 36px;">
-                  Ascolta
-                </button>
-                <a href="/pages/cultura.html" class="card-link-action" style="min-height: 36px;">
-                  Altre →
-                </a>
-              </div>
+            <div class="polaroid-caption">
+              <p>Ricordi da Londra · Studio 2026</p>
             </div>
           </article>
 

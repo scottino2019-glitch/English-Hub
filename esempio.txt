@@ -54,13 +54,19 @@ e usano link assoluti (/style.css, /app.js, /pages/..., /assets/...).
 Ogni card nella griglia deve avere:
   class="bento-card [COLORE] [DIMENSIONE]"
 
-COLORI DISPONIBILI:
-- card-white    -> Sfondo bianco, testo scuro
-- card-slate    -> Sfondo grigio chiarissimo, testo scuro
-- card-amber    -> Sfondo giallo crema caldo, testo scuro
-- card-emerald  -> Sfondo verde menta chiaro, testo scuro
-- card-rose     -> Sfondo rosa chiaro, testo scuro
-- card-dark     -> Sfondo blu notte (#0f172a), testo chiaro
+COLORI & STILI DISPONIBILI:
+- card-white          -> Sfondo bianco, testo scuro
+- card-slate          -> Sfondo grigio chiarissimo, testo scuro
+- card-amber          -> Sfondo giallo crema caldo, testo scuro
+- card-emerald        -> Sfondo verde menta chiaro, testo scuro
+- card-rose           -> Sfondo rosa chiaro, testo scuro
+- card-dark           -> Sfondo blu notte (#0f172a), testo chiaro
+- card-quiz-exam      -> Foglio esame puntinato con bordo superiore indaco
+- card-cloze-notebook -> Quaderno a righe menta con margine laterale verde
+- card-dialogue-chat  -> Finestra stile chat con barra superiore scura
+- card-postit         -> Post-it giallo (#fef08a) ruotato con spilla
+- card-blog-preview   -> Anteprima articolo rivista con foto laterale
+- polaroid-card       -> Polaroid vintage quadrata con didascalia in corsivo
 
 DIMENSIONI DISPONIBILI (su desktop 4 colonne):
 - span-1x1      -> Card piccola (1 colonna x 1 riga)
@@ -187,14 +193,19 @@ blocco <button class="cinema-playlist-item">...</button> in "index.html":
 il contatore video si aggiorna da solo.
 
 --------------------------------------------------------------------------------
-8. COME MODIFICARE CARD BLOG, POLAROID E SMARTPHONE IFRAME
+8. COME MODIFICARE ANTEPRIMA BLOG, POLAROID, POST-IT E SMARTPHONE IFRAME
 --------------------------------------------------------------------------------
 
-- Card Blog: cambia semplicemente l'attributo href="..." del bottone
-  <a href="/pages/cultura.html" class="btn btn-amber">Vai al Blog -></a>.
+- Anteprima Articolo Blog (.card-blog-preview): cambia l'immagine in
+  <div class="blog-preview-thumb">, il titolo, l'estratto e il link href="..."
+  del bottone "Leggi l'articolo ->".
 
-- Card Polaroid: cambia l'attributo src="..." dell'immagine dentro
-  <div class="polaroid-photo"> e modifica titolo/testo sotto la foto.
+- Polaroid Vintage (.polaroid-card): cambia il percorso src="..." dell'immagine
+  quadrata dentro <div class="polaroid-photo"> e modifica la scritta a mano in
+  basso dentro <div class="polaroid-caption">.
+
+- Post-It Falsi Amici (.card-postit): le voci continuano a scorrere cliccando
+  la freccia ->; puoi personalizzare etichette o stile in public/style.css.
 
 - Card Smartphone 9:16 (Iframe): cerca <iframe class="phone-iframe" ...>
   in "index.html". Per caricare un sito o una pagina reale al posto
