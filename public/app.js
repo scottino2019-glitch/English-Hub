@@ -584,54 +584,218 @@
       renderFc();
     }
 
-    // D. Quick Quiz
-    const qCounter = document.getElementById('home-quiz-counter');
-    const qXp = document.getElementById('home-quiz-xp');
-    const qPrompt = document.getElementById('home-quiz-prompt');
-    const qOptions = document.getElementById('home-quiz-options');
-    const qFeedback = document.getElementById('home-quiz-feedback');
-    const qNext = document.getElementById('home-quiz-next');
+    // D. Console Retrò Game & Learn (Quiz A1-C2)
+    const gbApp = document.getElementById('gameboy-app');
+    if (gbApp) {
+      const gbScore = document.getElementById('gb-score');
+      const gbStreak = document.getElementById('gb-streak');
+      const gbCatTag = document.getElementById('gb-cat-tag');
+      const gbCounter = document.getElementById('gb-question-counter');
+      const gbText = document.getElementById('gb-question-text');
+      const gbOptions = document.getElementById('gb-options-container');
+      const gbFeedback = document.getElementById('gb-feedback-banner');
+      const gbFeedbackTitle = document.getElementById('gb-feedback-title');
+      const gbFeedbackDesc = document.getElementById('gb-feedback-desc');
+      const gbNextBtn = document.getElementById('gb-next-btn');
+      const gbPowerBtn = document.getElementById('gb-power-btn');
+      const gbPowerSwitch = document.getElementById('gb-power-switch');
+      const gbPowerLed = document.getElementById('gb-power-led');
+      const gbScreenOff = document.getElementById('gb-screen-off');
 
-    if (qCounter && qPrompt && qOptions && qFeedback) {
-      let qIdx = 0;
-      let totalXp = 0;
-      let answered = false;
+      const gbState = {
+        idx: 0,
+        focused: 0,
+        selected: null,
+        answered: false,
+        score: 0,
+        streak: 0,
+        powerOn: true,
+        eliminated: [],
+        lifelineUsed: false,
+      };
+      const gbLetters = ['A', 'B', 'C', 'D'];
 
-      const renderQuiz = () => {
-        const q = QUIZ_QUESTIONS[qIdx];
-        answered = false;
-        qCounter.textContent = `Quesito ${String(qIdx + 1).padStart(2, '0')} / ${String(QUIZ_QUESTIONS.length).padStart(2, '0')} · Livello ${q.level}`;
-        if (qXp) qXp.textContent = `${totalXp} XP guadagnati`;
-        qPrompt.innerHTML = q.prompt.replace(
-          `“${q.term}”`,
-          `<mark style="background: var(--accent-amber-soft); padding: 0.1rem 0.4rem; border-radius: 0.375rem; font-family: var(--font-mono); color: var(--ink-primary);">“${q.term}”</mark>`
-        );
-        const letters = ['A', 'B', 'C', 'D'];
-        qOptions.innerHTML = q.options.map((opt, i) => `<button type="button" class="option-btn" data-opt-idx="${i}"><span><strong>${letters[i]}.</strong> ${opt}</span><span aria-hidden="true">○</span></button>`).join('');
-        qFeedback.innerHTML = `<strong>Suggerimento:</strong> Seleziona una risposta per verificare significato ed esempio d’uso.`;
+      const renderGameboy = () => {
+        if (!gbState.powerOn) {
+          if (gbScreenOff) gbScreenOff.classList.remove('is-hidden');
+          return;
+        }
+        if (gbScreenOff) gbScreenOff.classList.add('is-hidden');
+
+        const q = QUIZ_QUESTIONS[gbState.idx];
+        if (gbCatTag) gbCatTag.textContent = `LIVELLO ${q.level} · ${q.term.toUpperCase()}`;
+        if (gbCounter) gbCounter.textContent = `Q ${gbState.idx + 1}/${QUIZ_QUESTIONS.length}`;
+        if (gbText) gbText.textContent = q.prompt;
+        if (gbScore) gbScore.textContent = String(gbState.score);
+        if (gbStreak) gbStreak.textContent = `${gbState.streak}x`;
+
+        if (gbOptions) {
+          gbOptions.innerHTML = '';
+          q.options.forEach((optText, i) => {
+            const isElim = gbState.eliminated.includes(i);
+            const isFocused = i === gbState.focused && !gbState.answered;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'gb-opt-btn';
+
+            if (gbState.answered) {
+              if (i === q.correctIndex) btn.classList.add('is-correct');
+              else if (i === gbState.selected) btn.classList.add('is-wrong');
+              else btn.classList.add('is-dimmed');
+              btn.disabled = true;
+            } else if (isElim) {
+              btn.classList.add('is-eliminated');
+              btn.disabled = true;
+            } else if (isFocused) {
+              btn.classList.add('is-focused');
+            }
+
+            btn.innerHTML = `<span class="gb-opt-key">${isFocused ? '►' : gbLetters[i]}</span><span style="flex:1;">${optText}</span>${isElim ? '<span style="font-size:0.625rem;color:#f87171;">50:50</span>' : ''}`;
+            btn.addEventListener('click', () => selectGb(i));
+            gbOptions.appendChild(btn);
+          });
+        }
+
+        if (gbFeedback) {
+          if (gbState.answered) {
+            gbFeedback.classList.remove('is-hidden');
+            const ok = gbState.selected === q.correctIndex;
+            if (gbFeedbackTitle) gbFeedbackTitle.textContent = ok ? `★ ESATTO! (+${q.xp} PTS)` : '✖ RISPOSTA ERRATA!';
+            if (gbFeedbackDesc) gbFeedbackDesc.textContent = q.explanation;
+          } else {
+            gbFeedback.classList.add('is-hidden');
+          }
+        }
       };
 
-      qOptions.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-opt-idx]');
-        if (!btn || answered) return;
-        answered = true;
-        const chosen = Number(btn.dataset.optIdx);
-        const q = QUIZ_QUESTIONS[qIdx];
-        const ok = chosen === q.correctIndex;
-        if (ok) {
-          totalXp += q.xp;
-          if (qXp) qXp.textContent = `${totalXp} XP guadagnati`;
+      const selectGb = (optIdx) => {
+        if (!gbState.powerOn || gbState.answered || gbState.eliminated.includes(optIdx)) return;
+        gbState.selected = optIdx;
+        gbState.answered = true;
+        const q = QUIZ_QUESTIONS[gbState.idx];
+        if (optIdx === q.correctIndex) {
+          gbState.score += q.xp;
+          gbState.streak += 1;
+        } else {
+          gbState.streak = 0;
         }
-        qOptions.querySelectorAll('.option-btn').forEach((el, i) => {
-          el.disabled = true;
-          if (i === q.correctIndex) { el.classList.add('is-correct'); el.lastElementChild.textContent = '✓ Esatto'; }
-          else if (i === chosen && !ok) { el.classList.add('is-wrong'); el.lastElementChild.textContent = '✕ Errato'; }
+        renderGameboy();
+      };
+
+      const nextGb = () => {
+        if (!gbState.powerOn) return;
+        gbState.selected = null;
+        gbState.answered = false;
+        gbState.eliminated = [];
+        gbState.lifelineUsed = false;
+        gbState.focused = 0;
+        gbState.idx = (gbState.idx + 1) % QUIZ_QUESTIONS.length;
+        renderGameboy();
+      };
+
+      const moveGb = (delta) => {
+        if (!gbState.powerOn || gbState.answered) return;
+        const total = QUIZ_QUESTIONS[gbState.idx].options.length;
+        gbState.focused = (gbState.focused + delta + total) % total;
+        renderGameboy();
+      };
+
+      const confirmGb = () => {
+        if (!gbState.powerOn) return;
+        if (gbState.answered) nextGb();
+        else selectGb(gbState.focused);
+      };
+
+      const lifelineGb = () => {
+        if (!gbState.powerOn || gbState.answered || gbState.lifelineUsed) return;
+        const q = QUIZ_QUESTIONS[gbState.idx];
+        const wrongs = q.options.map((_, i) => i).filter((i) => i !== q.correctIndex);
+        gbState.eliminated = wrongs.slice(0, 2);
+        gbState.lifelineUsed = true;
+        renderGameboy();
+      };
+
+      const bindGbClick = (id, handler) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('click', handler);
+      };
+
+      ['a', 'b', 'c', 'd'].forEach((letter, idx) => {
+        bindGbClick(`gb-btn-${letter}`, () => {
+          if (gbState.answered) nextGb();
+          else selectGb(idx);
         });
-        qFeedback.innerHTML = `<strong>${ok ? `Corretto (+${q.xp} XP)` : 'Risposta non corretta'}:</strong> ${q.explanation}`;
       });
 
-      if (qNext) qNext.addEventListener('click', () => { qIdx = (qIdx + 1) % QUIZ_QUESTIONS.length; renderQuiz(); });
-      renderQuiz();
+      bindGbClick('gb-dpad-up', () => moveGb(-1));
+      bindGbClick('gb-dpad-down', () => moveGb(1));
+      bindGbClick('gb-dpad-left', () => moveGb(-1));
+      bindGbClick('gb-dpad-right', () => moveGb(1));
+      bindGbClick('gb-dpad-center', confirmGb);
+      bindGbClick('gb-btn-select', lifelineGb);
+      bindGbClick('gb-btn-start', confirmGb);
+      if (gbNextBtn) gbNextBtn.addEventListener('click', nextGb);
+
+      if (gbPowerBtn) {
+        gbPowerBtn.addEventListener('click', () => {
+          gbState.powerOn = !gbState.powerOn;
+          if (gbPowerSwitch) gbPowerSwitch.classList.toggle('is-off', !gbState.powerOn);
+          if (gbPowerLed) gbPowerLed.classList.toggle('is-off', !gbState.powerOn);
+          renderGameboy();
+        });
+      }
+
+      renderGameboy();
+    } else {
+      // Fallback per la card quiz classica se presente
+      const qCounter = document.getElementById('home-quiz-counter');
+      const qXp = document.getElementById('home-quiz-xp');
+      const qPrompt = document.getElementById('home-quiz-prompt');
+      const qOptions = document.getElementById('home-quiz-options');
+      const qFeedback = document.getElementById('home-quiz-feedback');
+      const qNext = document.getElementById('home-quiz-next');
+
+      if (qCounter && qPrompt && qOptions && qFeedback) {
+        let qIdx = 0;
+        let totalXp = 0;
+        let answered = false;
+
+        const renderQuiz = () => {
+          const q = QUIZ_QUESTIONS[qIdx];
+          answered = false;
+          qCounter.textContent = `Quesito ${String(qIdx + 1).padStart(2, '0')} / ${String(QUIZ_QUESTIONS.length).padStart(2, '0')} · Livello ${q.level}`;
+          if (qXp) qXp.textContent = `${totalXp} XP guadagnati`;
+          qPrompt.innerHTML = q.prompt.replace(
+            `“${q.term}”`,
+            `<mark style="background: var(--accent-amber-soft); padding: 0.1rem 0.4rem; border-radius: 0.375rem; font-family: var(--font-mono); color: var(--ink-primary);">“${q.term}”</mark>`
+          );
+          const letters = ['A', 'B', 'C', 'D'];
+          qOptions.innerHTML = q.options.map((opt, i) => `<button type="button" class="option-btn" data-opt-idx="${i}"><span><strong>${letters[i]}.</strong> ${opt}</span><span aria-hidden="true">○</span></button>`).join('');
+          qFeedback.innerHTML = `<strong>Suggerimento:</strong> Seleziona una risposta per verificare significato ed esempio d’uso.`;
+        };
+
+        qOptions.addEventListener('click', (e) => {
+          const btn = e.target.closest('[data-opt-idx]');
+          if (!btn || answered) return;
+          answered = true;
+          const chosen = Number(btn.dataset.optIdx);
+          const q = QUIZ_QUESTIONS[qIdx];
+          const ok = chosen === q.correctIndex;
+          if (ok) {
+            totalXp += q.xp;
+            if (qXp) qXp.textContent = `${totalXp} XP guadagnati`;
+          }
+          qOptions.querySelectorAll('.option-btn').forEach((el, i) => {
+            el.disabled = true;
+            if (i === q.correctIndex) { el.classList.add('is-correct'); el.lastElementChild.textContent = '✓ Esatto'; }
+            else if (i === chosen && !ok) { el.classList.add('is-wrong'); el.lastElementChild.textContent = '✕ Errato'; }
+          });
+          qFeedback.innerHTML = `<strong>${ok ? `Corretto (+${q.xp} XP)` : 'Risposta non corretta'}:</strong> ${q.explanation}`;
+        });
+
+        if (qNext) qNext.addEventListener('click', () => { qIdx = (qIdx + 1) % QUIZ_QUESTIONS.length; renderQuiz(); });
+        renderQuiz();
+      }
     }
 
     // E. Quick Cloze
@@ -675,14 +839,42 @@
       renderCloze();
     }
 
-    // F. Dialogue audio
+    // F. Dialogue Baloon Fumetto
     const dAudio = document.getElementById('home-dialogue-audio');
+    const dStack = document.getElementById('home-dialogue-stack');
+    const dLevel = document.getElementById('home-dialogue-level');
+    const dLoc = document.getElementById('home-dialogue-location');
+    const dNext = document.getElementById('home-dialogue-next');
+    let homeDialogueIdx = 0;
+
+    const renderHomeDialogue = () => {
+      if (!dStack) return;
+      const d = DIALOGUES[homeDialogueIdx];
+      if (dLevel) dLevel.textContent = `Livello: ${d.level}`;
+      if (dLoc) dLoc.textContent = `${d.location} · EN / IT`;
+      dStack.innerHTML = d.turns.slice(0, 2).map((t, i) => `
+        <div class="dialogue-balloon${i % 2 === 1 ? ' dialogue-balloon--alt' : ''}">
+          <div style="font-size: 0.9375rem; font-weight: 800; line-height: 1.4;">${t.en}</div>
+          <div style="font-size: 0.8125rem; color: #475569; margin-top: 0.25rem; font-style: italic;">${t.it}</div>
+          <div class="balloon-tail" aria-hidden="true"></div>
+        </div>
+      `).join('');
+    };
+
+    if (dStack) renderHomeDialogue();
+    if (dNext) {
+      dNext.addEventListener('click', () => {
+        homeDialogueIdx = (homeDialogueIdx + 1) % DIALOGUES.length;
+        renderHomeDialogue();
+      });
+    }
     if (dAudio) {
       dAudio.addEventListener('click', () => {
-        const text = DIALOGUES[0].turns.slice(0, 2).map((t) => t.en.replace(/[“”]/g, '')).join(' ');
+        const d = DIALOGUES[homeDialogueIdx];
+        const text = d.turns.slice(0, 2).map((t) => t.en.replace(/[“”]/g, '')).join(' ');
         speakEnglish(text, {
-          onStart: () => { dAudio.textContent = 'In riproduzione...'; },
-          onEnd: () => { dAudio.textContent = 'Ascolta Dialogo'; },
+          onStart: () => { dAudio.innerHTML = '<span>In riproduzione...</span> <span>🔊</span>'; },
+          onEnd: () => { dAudio.innerHTML = '<span>Ascolta</span> <span>🔊</span>'; },
         });
       });
     }
@@ -977,7 +1169,7 @@
       if (initialItem) loadItem(initialItem, false);
     }
 
-    // J. Polaroid Audio Button
+    // J. Polaroid Audio Button (se presente)
     const polaroidBtn = document.getElementById('polaroid-audio-btn');
     if (polaroidBtn) {
       polaroidBtn.addEventListener('click', () => {
@@ -986,6 +1178,82 @@
           onEnd: () => { polaroidBtn.textContent = 'Ascolta'; },
         });
       });
+    }
+
+    // K. Contenitore Lezioni Statiche HTML (Manuale di Studio)
+    const lessonChaptersList = document.getElementById('lesson-chapters-list');
+    const lessonCanvas = document.getElementById('lesson-reading-canvas');
+    const lessonReadTime = document.getElementById('lesson-read-time');
+    const lessonCounter = document.getElementById('lesson-chapter-counter');
+    const lessonPageLabel = document.getElementById('lesson-page-label');
+    const lessonOpenLink = document.getElementById('lesson-open-link');
+    const lessonPrevBtn = document.getElementById('lesson-prev-btn');
+    const lessonNextBtn = document.getElementById('lesson-next-btn');
+    const lessonZoomBtn = document.getElementById('lesson-zoom-btn');
+
+    if (lessonChaptersList && lessonCanvas) {
+      const chapterBtns = Array.from(lessonChaptersList.querySelectorAll('.lesson-chapter-btn'));
+      let activeLessonIdx = Math.max(0, chapterBtns.findIndex((b) => b.classList.contains('is-active')));
+
+      const updateNavButtons = () => {
+        if (lessonCounter) lessonCounter.textContent = `Lezione ${activeLessonIdx + 1} di ${chapterBtns.length}`;
+        if (lessonPageLabel) lessonPageLabel.textContent = `— Scheda ${String(activeLessonIdx + 1).padStart(2, '0')} —`;
+        if (lessonPrevBtn) lessonPrevBtn.disabled = activeLessonIdx <= 0;
+        if (lessonNextBtn) lessonNextBtn.disabled = activeLessonIdx >= chapterBtns.length - 1;
+      };
+
+      const loadLessonAt = async (idx) => {
+        const btn = chapterBtns[idx];
+        if (!btn) return;
+        activeLessonIdx = idx;
+
+        chapterBtns.forEach((b, i) => b.classList.toggle('is-active', i === idx));
+        const src = btn.dataset.src || '';
+        const time = btn.dataset.time || '~5 min';
+        if (lessonReadTime) lessonReadTime.textContent = `Lettura: ${time}`;
+        if (lessonOpenLink && src) lessonOpenLink.href = src;
+        updateNavButtons();
+
+        if (!src) return;
+        try {
+          const res = await fetch(src);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const html = await res.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+          const docEl = parsed.querySelector('.lesson-doc') || parsed.body;
+          lessonCanvas.innerHTML = docEl ? docEl.innerHTML : html;
+        } catch {
+          lessonCanvas.innerHTML = `<iframe class="lesson-iframe-fallback" src="${src}" title="${btn.dataset.title || 'Lezione HTML'}"></iframe>`;
+        }
+      };
+
+      lessonChaptersList.addEventListener('click', (e) => {
+        const btn = e.target.closest('.lesson-chapter-btn');
+        if (!btn) return;
+        const idx = chapterBtns.indexOf(btn);
+        if (idx !== -1) loadLessonAt(idx);
+      });
+
+      if (lessonPrevBtn) {
+        lessonPrevBtn.addEventListener('click', () => {
+          if (activeLessonIdx > 0) loadLessonAt(activeLessonIdx - 1);
+        });
+      }
+
+      if (lessonNextBtn) {
+        lessonNextBtn.addEventListener('click', () => {
+          if (activeLessonIdx < chapterBtns.length - 1) loadLessonAt(activeLessonIdx + 1);
+        });
+      }
+
+      if (lessonZoomBtn) {
+        lessonZoomBtn.addEventListener('click', () => {
+          const large = lessonCanvas.classList.toggle('is-large');
+          lessonZoomBtn.textContent = large ? 'A-' : 'A+';
+        });
+      }
+
+      if (chapterBtns.length > 0) loadLessonAt(activeLessonIdx);
     }
   }
 

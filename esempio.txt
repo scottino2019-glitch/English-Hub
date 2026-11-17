@@ -35,6 +35,10 @@ e usano link assoluti (/style.css, /app.js, /pages/..., /assets/...).
 - public/assets/images/
   Le immagini locali usate dal sito.
 
+- public/lessons/*.html
+  Le lezioni statiche in HTML mostrate nel Manuale di Studio in homepage
+  (es. /lessons/lezione-01.html, /lessons/lezione-02.html, ...).
+
 --------------------------------------------------------------------------------
 2. COME TOGLIERE UNA CARD DALLA HOMEPAGE
 --------------------------------------------------------------------------------
@@ -210,5 +214,21 @@ il contatore video si aggiorna da solo.
 - Card Smartphone 9:16 (Iframe): cerca <iframe class="phone-iframe" ...>
   in "index.html". Per caricare un sito o una pagina reale al posto
   dell'anteprima demo, sostituisci srcdoc="..." con src="https://tuo-sito.it".
-================================================================================
 
+--------------------------------------------------------------------------------
+9. COME AGGIUNGERE O MODIFICARE LEZIONI STATICHE HTML (MANUALE DI STUDIO)
+--------------------------------------------------------------------------------
+
+1. Crea o modifica un file HTML dentro "public/lessons/" (copiando la struttura
+   di "public/lessons/lezione-01.html" con <article class="lesson-doc">).
+2. In "index.html", dentro <div id="lesson-chapters-list">, aggiungi o modifica
+   un pulsante:
+   <button type="button" class="lesson-chapter-btn"
+           data-src="/lessons/lezione-04.html"
+           data-title="Lezione 04" data-time="~5 min">
+     <span>Cap. IV · Titolo Lezione</span>
+     <span>B2 · HTML</span>
+   </button>
+3. Il lettore carica il file HTML statico automaticamente nel riquadro di lettura,
+   aggiorna contatore e pulsanti Prec./Succ. senza dover toccare "public/app.js".
+================================================================================

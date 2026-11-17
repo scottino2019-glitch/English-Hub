@@ -187,67 +187,116 @@
             </div>
           </article>
 
-          <!-- D. QUIZ VOCABOLARIO RAPIDO (2x2) -->
-          <section id="quiz" class="bento-card card-quiz-exam span-2x2" aria-labelledby="home-quiz-title">
-            <div class="card-header">
-              <div>
-                <span class="quiz-ribbon-tag">QUIZ TIME · +XP</span>
-                <h2 id="home-quiz-title" class="card-title">Quiz Vocabolario Rapido</h2>
-                <p id="home-quiz-counter" class="card-subtitle tabular-nums">Quesito 01 / 06 · Livello C1</p>
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span id="home-quiz-xp" class="tabular-nums" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: #4338ca;">
-                  0 XP guadagnati
-                </span>
-                <a href="/pages/quiz.html" class="card-link-action" style="color: #4f46e5;">Apri Quiz Completo →</a>
-              </div>
+          <!-- D. CONSOLE RETRÒ GAME & LEARN (QUIZ A1-C2) (2x2) -->
+          <section id="gameboy-app" class="gb-console span-2x2" aria-label="Console quiz interattivo inglese">
+            <!-- Cartuccia Superiore -->
+            <div class="gb-cartridge">
+              <span class="gb-cart-dot" aria-hidden="true"></span>
+              <span style="font-family: var(--font-mono); font-size: 0.5625rem; font-weight: 800; color: #fcd34d; letter-spacing: 0.1em;">
+                ENGLISH QUEST CARTRIDGE
+              </span>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.875rem;">
-              <p id="home-quiz-prompt" style="font-size: 1.0625rem; font-weight: 800; line-height: 1.4;">
-                Cosa significa l’aggettivo inglese “Ubiquitous”?
-              </p>
-              <div id="home-quiz-options" class="options-grid options-grid--2"></div>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <div id="home-quiz-feedback" class="feedback-box"></div>
-              <div style="display: flex; justify-content: flex-end;">
-                <button type="button" id="home-quiz-next" class="btn btn-amber">
-                  Prossima domanda →
+            <!-- Barra Power e Link Quiz Completo -->
+            <div class="gb-power-bar">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <div id="gb-power-led" class="gb-power-led"></div>
+                <span style="font-family: var(--font-mono); font-size: 0.625rem; font-weight: 700; color: #a8a29e;">POWER</span>
+                <a href="/pages/quiz.html" style="font-family: var(--font-mono); font-size: 0.625rem; font-weight: 700; color: #fcd34d; margin-left: 0.375rem;">
+                  Quiz Completo →
+                </a>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.375rem;">
+                <span style="font-family: var(--font-mono); font-size: 0.5625rem; color: #a8a29e;">OFF / ON</span>
+                <button id="gb-power-btn" type="button" class="gb-power-btn" aria-label="Accendi o spegni console">
+                  <div id="gb-power-switch" class="gb-power-switch"></div>
                 </button>
+              </div>
+            </div>
+
+            <!-- Bezel Schermo LCD a Fosfori Verdi -->
+            <div class="gb-bezel">
+              <div class="gb-bezel-header">
+                <span style="font-weight: 700; color: #d6d3d1;">DOT MATRIX · ENGLISH QUIZ</span>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="color: #fbbf24;">STREAK: <strong id="gb-streak" style="color: #fcd34d;">0x</strong></span>
+                  <span>•</span>
+                  <span style="color: #34d399;">PTS: <strong id="gb-score" style="color: #6ee7b7;">0</strong></span>
+                </div>
+              </div>
+
+              <div id="gb-screen" class="gb-screen">
+                <div class="gb-scanlines" aria-hidden="true"></div>
+
+                <div class="gb-screen-top">
+                  <span id="gb-cat-tag" class="gb-cat-tag">LIVELLO C1 · UBIQUITOUS</span>
+                  <span id="gb-question-counter" style="color: #729c66;">Q 1/12</span>
+                </div>
+
+                <p id="gb-question-text" class="gb-question-text"></p>
+
+                <div id="gb-options-container" class="gb-options-list"></div>
+
+                <div id="gb-feedback-banner" class="gb-feedback is-hidden">
+                  <p id="gb-feedback-title" style="font-size: 0.75rem; font-weight: 800; color: #e6fcd9;"></p>
+                  <p id="gb-feedback-desc" style="font-size: 0.6875rem; color: #9fc78d; line-height: 1.4;"></p>
+                  <button id="gb-next-btn" type="button" class="gb-next-btn">
+                    PROSSIMA DOMANDA (O PREMI START / A) →
+                  </button>
+                </div>
+
+                <div id="gb-screen-off" class="gb-screen-off is-hidden">
+                  <strong style="color: #a8a29e; margin-bottom: 0.25rem;">[ CONSOLE SPENTA ]</strong>
+                  <span style="font-size: 0.625rem;">ACCENDI LO SWITCH POWER IN ALTO PER GIOCARE</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controlli Tattili: D-Pad 3D, Select 50:50 / Start, 4 Tasti A B C D -->
+            <div class="gb-controls-row">
+              <div class="gb-dpad-wrap">
+                <div class="gb-dpad">
+                  <div class="gb-dpad-bar-h">
+                    <button id="gb-dpad-left" type="button" class="gb-dpad-btn" aria-label="Opzione precedente">◄</button>
+                    <button id="gb-dpad-right" type="button" class="gb-dpad-btn" aria-label="Opzione successiva">►</button>
+                  </div>
+                  <div class="gb-dpad-bar-v">
+                    <button id="gb-dpad-up" type="button" class="gb-dpad-btn" aria-label="Su">▲</button>
+                    <button id="gb-dpad-down" type="button" class="gb-dpad-btn" aria-label="Giù">▼</button>
+                  </div>
+                  <button id="gb-dpad-center" type="button" class="gb-dpad-center" aria-label="Conferma selezione"></button>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 0.5rem; color: #a8a29e; font-weight: 700;">D-PAD NAV</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 0.375rem;">
+                <div class="gb-fn-row">
+                  <div style="display: flex; flex-direction: column; align-items: center;">
+                    <button id="gb-btn-select" type="button" class="gb-fn-pill" title="Aiuto 50:50" aria-label="Aiuto 50 a 50"></button>
+                    <span style="font-family: var(--font-mono); font-size: 0.5rem; font-weight: 800; color: #fcd34d; margin-top: 0.25rem;">50:50</span>
+                  </div>
+                  <div style="display: flex; flex-direction: column; align-items: center;">
+                    <button id="gb-btn-start" type="button" class="gb-fn-pill" title="START: Conferma o Avanti" aria-label="Start"></button>
+                    <span style="font-family: var(--font-mono); font-size: 0.5rem; font-weight: 800; color: #d6d3d1; margin-top: 0.25rem;">START</span>
+                  </div>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 0.5rem; color: #a8a29e;">FUNZIONI</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem;">
+                <div class="gb-ab-grid">
+                  <button id="gb-btn-a" type="button" class="gb-action-btn gb-action-a">A</button>
+                  <button id="gb-btn-b" type="button" class="gb-action-btn gb-action-b">B</button>
+                  <button id="gb-btn-c" type="button" class="gb-action-btn gb-action-c">C</button>
+                  <button id="gb-btn-d" type="button" class="gb-action-btn gb-action-d">D</button>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 0.5rem; color: #d6d3d1; font-weight: 700;">4 TASTI A•B•C•D</span>
               </div>
             </div>
           </section>
 
-          <!-- E. ESERCIZIO COMPLETA LA FRASE / CLOZE TEST (2x2) -->
-          <section id="esercizi" class="bento-card card-cloze-notebook span-2x2" aria-labelledby="home-cloze-title">
-            <div class="card-header">
-              <div>
-                <span class="notebook-stamp-tag">✎ GRAMMAR NOTEBOOK</span>
-                <h2 id="home-cloze-title" class="card-title">Completa la Frase (Cloze Test)</h2>
-                <p id="home-cloze-meta" class="card-subtitle">Condizionali · Livello C1</p>
-              </div>
-              <a href="/pages/esercizi.html" class="card-link-action">Tutti gli Esercizi →</a>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 0.875rem;">
-              <div id="home-cloze-sentence" class="cloze-sentence"></div>
-              <div id="home-cloze-options" class="options-grid options-grid--3"></div>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <div id="home-cloze-feedback" class="feedback-box feedback-box--emerald"></div>
-              <div style="display: flex; justify-content: flex-end;">
-                <button type="button" id="home-cloze-next" class="btn btn-primary">
-                  Esercizio successivo →
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <!-- F. DIALOGO SITUAZIONALE A LONDRA (2x2) -->
-          <section id="dialogo" class="bento-card card-dialogue-chat span-2x2" aria-labelledby="home-dialogue-title">
+          <!-- E. ESERCIZIO COMPLETA LA FRASE / CLOZE TEST (STILE FINESTRA) (2x2) -->
+          <section id="esercizi" class="bento-card card-dialogue-chat span-2x2" aria-labelledby="home-cloze-title">
             <div class="chat-window-bar">
               <div style="display: flex; align-items: center; gap: 0.75rem;">
                 <div class="chat-window-dots" aria-hidden="true">
@@ -256,52 +305,83 @@
                   <span style="background: #10b981;"></span>
                 </div>
                 <div>
-                  <h2 id="home-dialogue-title" class="card-title" style="color: #ffffff; font-size: 0.9375rem;">
-                    💬 At a Coffee Shop in Soho
+                  <h2 id="home-cloze-title" class="card-title" style="color: #ffffff; font-size: 0.9375rem;">
+                    ✎ Completa la Frase (Cloze Test)
                   </h2>
-                  <p style="font-family: var(--font-mono); font-size: 0.6875rem; color: #94a3b8;">
-                    ● LIVE CONVERSATION · INGLESE BRITANNICO
+                  <p id="home-cloze-meta" style="font-family: var(--font-mono); font-size: 0.6875rem; color: #a7f3d0;">
+                    Condizionali · Livello C1
                   </p>
                 </div>
               </div>
-              <a href="/pages/dialogo.html" class="card-link-action" style="color: #93c5fd; min-height: auto;">
-                Altri Dialoghi →
+              <a href="/pages/esercizi.html" class="card-link-action" style="color: #6ee7b7; min-height: auto;">
+                Tutti gli Esercizi →
               </a>
             </div>
 
             <div class="chat-window-body">
-              <div class="dialogue-list">
-                <div class="dialogue-turn">
-                  <span class="speaker-avatar">Tu</span>
-                  <div class="dialogue-bubble">
-                    <p class="dialogue-en">
-                      “Morning! Could I grab a flat white to have in, and one of those warm fruit scones, please?”
-                    </p>
-                    <p class="dialogue-it">
-                      “Buongiorno! Potrei avere un flat white da bere qui e uno di quegli scone caldi alla frutta, per favore?”
-                    </p>
-                  </div>
-                </div>
-
-                <div class="dialogue-turn">
-                  <span class="speaker-avatar speaker-avatar--alt">Bar</span>
-                  <div class="dialogue-bubble dialogue-bubble--alt">
-                    <p class="dialogue-en">
-                      “Of course! Would you like clotted cream and strawberry jam with the scone?”
-                    </p>
-                    <p class="dialogue-it">
-                      “Certamente! Desidera panna rappresa e marmellata di fragole con lo scone?”
-                    </p>
-                  </div>
-                </div>
+              <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+                <div id="home-cloze-sentence" class="cloze-sentence"></div>
+                <div id="home-cloze-options" class="options-grid options-grid--3"></div>
               </div>
 
-              <div class="feedback-box" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; background: #ffffff; border-color: #c7d2fe;">
-                <p style="font-size: 0.8125rem; max-width: 44ch;">
-                  <strong>Galateo UK:</strong> evita l’imperativo diretto; inizia sempre con <em>“Could I have...”</em> seguito da <em>“please”</em>.
-                </p>
-                <button type="button" id="home-dialogue-audio" class="btn btn-amber">
-                  Ascolta Dialogo
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div id="home-cloze-feedback" class="feedback-box feedback-box--emerald"></div>
+                <div style="display: flex; justify-content: flex-end;">
+                  <button type="button" id="home-cloze-next" class="btn btn-primary">
+                    Esercizio successivo →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- F. DIALOGO VIVO CON BALOON FUMETTO (2x2) -->
+          <section id="dialogo" class="card-dialogue-balloon span-2x2" aria-labelledby="home-dialogue-title">
+            <div class="balloon-topbar">
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <span class="balloon-badge">DIALOGO VIVO 💬</span>
+                <h2 id="home-dialogue-title" class="card-title" style="font-size: 0.9375rem;">
+                  At a Coffee Shop in Soho
+                </h2>
+              </div>
+              <span id="home-dialogue-location" style="font-family: var(--font-mono); font-size: 0.6875rem; color: #64748b;">
+                Soho · EN / IT
+              </span>
+            </div>
+
+            <div id="home-dialogue-stack" class="dialogue-balloon-stack">
+              <div class="dialogue-balloon">
+                <div style="font-size: 0.9375rem; font-weight: 800; line-height: 1.4;">
+                  “Morning! Could I grab a flat white to have in, and one of those warm fruit scones, please?”
+                </div>
+                <div style="font-size: 0.8125rem; color: #475569; margin-top: 0.25rem; font-style: italic;">
+                  “Buongiorno! Potrei avere un flat white da bere qui e uno di quegli scone caldi alla frutta, per favore?”
+                </div>
+                <div class="balloon-tail" aria-hidden="true"></div>
+              </div>
+
+              <div class="dialogue-balloon dialogue-balloon--alt">
+                <div style="font-size: 0.9375rem; font-weight: 800; line-height: 1.4;">
+                  “Of course! Would you like clotted cream and strawberry jam with the scone?”
+                </div>
+                <div style="font-size: 0.8125rem; color: #475569; margin-top: 0.25rem; font-style: italic;">
+                  “Certamente! Desidera panna rappresa e marmellata di fragole con lo scone?”
+                </div>
+                <div class="balloon-tail" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <div class="balloon-footer">
+              <div style="display: flex; align-items: center; gap: 0.625rem;">
+                <span id="home-dialogue-level" style="color: #64748b; font-size: 0.75rem;">Livello: B1</span>
+                <a href="/pages/dialogo.html" style="color: var(--accent-emerald-strong); font-weight: 800;">Altri →</a>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <button type="button" id="home-dialogue-next" class="btn-audio-icon" style="min-height: 34px; padding: 0 0.625rem;" title="Prossimo dialogo">
+                  →
+                </button>
+                <button type="button" id="home-dialogue-audio" class="btn-dark-amber">
+                  <span>Ascolta</span> <span>🔊</span>
                 </button>
               </div>
             </div>
@@ -678,6 +758,120 @@
 
             <div class="phone-home-indicator" aria-hidden="true"></div>
           </article>
+
+          <!-- M. CONTENITORE LEZIONI STATICHE HTML (MANUALE DI LETTURA) (4x1) -->
+          <!-- Per aggiungere una lezione statica, crea un file in /public/lessons/ e aggiungi un <button class="lesson-chapter-btn" data-src="/lessons/..."> -->
+          <section id="lesson-book-card" class="lesson-book-card span-4x1" aria-label="Lettore lezioni statiche HTML">
+            <div class="lesson-topbar">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div class="lesson-topbar-icon" aria-hidden="true">✒️</div>
+                <div>
+                  <span style="font-family: var(--font-mono); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.1em; color: #d4af37; font-weight: 700; display: block;">
+                    Archivio Lezioni Statiche HTML
+                  </span>
+                  <h2 style="font-family: Georgia, serif; font-size: 0.9375rem; font-weight: 700; color: #ffffff;">
+                    English Handbook · Schede di Studio
+                  </h2>
+                </div>
+              </div>
+
+              <div class="lesson-topbar-tools">
+                <button id="lesson-zoom-btn" type="button" class="lesson-tool-btn" title="Cambia dimensione testo">
+                  A+
+                </button>
+                <a id="lesson-open-link" href="/lessons/lezione-01.html" class="lesson-tool-btn">
+                  Apri scheda HTML ↗
+                </a>
+              </div>
+            </div>
+
+            <div class="lesson-workspace">
+              <!-- Sidebar compatta: Mini copertina libro + Indice Lezioni HTML -->
+              <aside class="lesson-sidebar" aria-label="Indice lezioni">
+                <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+                  <div class="lesson-mini-book">
+                    <div class="lesson-mini-cover" aria-hidden="true">EN</div>
+                    <div style="min-width: 0;">
+                      <div style="font-family: var(--font-mono); font-size: 0.5625rem; color: #d4af37; text-transform: uppercase; letter-spacing: 0.08em;">
+                        Volume I
+                      </div>
+                      <div style="font-family: Georgia, serif; font-size: 0.8125rem; font-weight: 700; color: #fce8c5; line-height: 1.2;">
+                        English Grammar &amp; Style
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style="font-family: var(--font-mono); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.08em; color: #a8a29e; margin-bottom: 0.375rem;">
+                      Indice Lezioni (.html)
+                    </div>
+                    <div id="lesson-chapters-list" class="lesson-chapters-list">
+                      <button
+                        type="button"
+                        class="lesson-chapter-btn is-active"
+                        data-src="/lessons/lezione-01.html"
+                        data-title="Lezione 01: Present Simple &amp; Routine"
+                        data-time="~4 min"
+                      >
+                        <span>Cap. I · Present Simple</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.625rem; color: #b38f54;">A1–A2 · HTML</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="lesson-chapter-btn"
+                        data-src="/lessons/lezione-02.html"
+                        data-title="Lezione 02: Phrasal Verbs Essenziali"
+                        data-time="~5 min"
+                      >
+                        <span>Cap. II · Phrasal Verbs</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.625rem; color: #b38f54;">B1–B2 · HTML</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="lesson-chapter-btn"
+                        data-src="/lessons/lezione-03.html"
+                        data-title="Lezione 03: Condizionali &amp; Inversione"
+                        data-time="~6 min"
+                      >
+                        <span>Cap. III · Inversione C1</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.625rem; color: #b38f54;">C1–C2 · HTML</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="font-family: var(--font-mono); font-size: 0.625rem; color: #a8a29e; padding-top: 0.5rem; border-top: 1px solid #3d271a;">
+                  Cartella: <span style="color: #e5c17e;">/lessons/*.html</span>
+                </div>
+              </aside>
+
+              <!-- Ampia area di lettura su pergamena -->
+              <div class="lesson-paper">
+                <div class="lesson-paper-toolbar">
+                  <span id="lesson-chapter-counter">Lezione 1 di 3</span>
+                  <span id="lesson-read-time">Lettura: ~4 min</span>
+                </div>
+
+                <div id="lesson-reading-canvas" class="lesson-reading-canvas">
+                  <p>Caricamento lezione statica in corso...</p>
+                </div>
+
+                <div class="lesson-reader-footer">
+                  <button id="lesson-prev-btn" type="button" class="lesson-nav-btn">
+                    ← Prec.
+                  </button>
+                  <span id="lesson-page-label" style="font-family: Georgia, serif; color: #8a7663;">
+                    — Scheda 01 —
+                  </span>
+                  <button id="lesson-next-btn" type="button" class="lesson-nav-btn">
+                    Succ. →
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
         </main>
 
         <!-- 3. FOOTER HTML INDIPENDENTE -->
