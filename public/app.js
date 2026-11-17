@@ -173,7 +173,7 @@
     subtitle: 'Chiedere informazioni su ingredienti e personalizzare un ordine al bar',
     location: 'Melbourne · Australia',
     level: 'A2',
-    image: '/assets/images/melbourne-cafe.jpg',
+    image: '/assets/images/melbourne-cafe.jpeg',
     imageAlt: 'Bancone di una caffetteria moderna a Melbourne con macchina per espresso e tazze in ceramica',
     etiquetteTip: 'In Australia è molto comune usare “No worries” come risposta amichevole a “Thank you” o per rassicurare l’interlocutore.',
     turns: [
@@ -203,7 +203,7 @@
     subtitle: 'Negoziare scadenze e priorità durante una riunione di team',
     location: 'San Francisco · Stati Uniti',
     level: 'B2',
-    image: '/assets/images/sf-coworking.jpg',
+    image: '/assets/images/sf-coworking.jpeg',
     imageAlt: 'Sala riunioni luminosa in uno spazio coworking a San Francisco con lavagna di vetro',
     etiquetteTip: 'Negli ambienti tech americani si usano spesso espressioni idiomatiche come “on the same page” (essere d’accordo/allineati) o “circle back” (tornare su un argomento più tardi).',
     turns: [
