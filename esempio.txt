@@ -160,4 +160,44 @@ nell'header delle pagine dove vuoi mostrarlo.
 Apri "public/style.css" e modifica le variabili dentro ":root { ... }"
 all'inizio del file (es. --bg-canvas, --accent-emerald, --accent-amber,
 --font-sans, --radius-card). Il cambiamento si applica a tutte le pagine.
+
+--------------------------------------------------------------------------------
+7. COME CAMBIARE LINK E INFORMAZIONI DEI VIDEO (CINEMA PLAYER)
+--------------------------------------------------------------------------------
+
+Tutti i video della playlist si modificano direttamente in "index.html",
+senza dover toccare "public/app.js".
+
+Cerca dentro <div id="video-lateral-list"> i pulsanti <button class="cinema-playlist-item">
+e cambia questi attributi:
+
+- data-chapter   -> Etichetta capitolo (es. "Capitolo 01")
+- data-title     -> Titolo del video (modificalo anche dentro lo span visibile sotto)
+- data-subtitle  -> Sottotitolo descrittivo mostrato sotto lo schermo
+- data-duration  -> Durata mostrata (es. "12:45")
+- data-thumb     -> Percorso dell'immagine di anteprima (es. "/assets/images/london-mews.jpg")
+- data-src       -> Link al video vero e proprio! Supporta automaticamente:
+                    * Link YouTube  (es. "https://www.youtube.com/watch?v=...")
+                    * Link Vimeo    (es. "https://vimeo.com/123456789")
+                    * File .mp4     (es. "/assets/video/lezione1.mp4" o URL esterno)
+                    * Vuoto ""      (mostra l'anteprima interattiva con immagine)
+
+Per AGGIUNGERE o TOGLIERE un video dalla playlist, copia o cancella un intero
+blocco <button class="cinema-playlist-item">...</button> in "index.html":
+il contatore video si aggiorna da solo.
+
+--------------------------------------------------------------------------------
+8. COME MODIFICARE CARD BLOG, POLAROID E SMARTPHONE IFRAME
+--------------------------------------------------------------------------------
+
+- Card Blog: cambia semplicemente l'attributo href="..." del bottone
+  <a href="/pages/cultura.html" class="btn btn-amber">Vai al Blog -></a>.
+
+- Card Polaroid: cambia l'attributo src="..." dell'immagine dentro
+  <div class="polaroid-photo"> e modifica titolo/testo sotto la foto.
+
+- Card Smartphone 9:16 (Iframe): cerca <iframe class="phone-iframe" ...>
+  in "index.html". Per caricare un sito o una pagina reale al posto
+  dell'anteprima demo, sostituisci srcdoc="..." con src="https://tuo-sito.it".
 ================================================================================
+

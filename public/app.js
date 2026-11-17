@@ -737,6 +737,256 @@
       if (ffNext) ffNext.addEventListener('click', () => { ffIdx = (ffIdx + 1) % FALSE_FRIENDS.length; renderFf(); });
       renderFf();
     }
+
+    // I. Cinema Video Player con Playlist Laterale
+    const cinemaScreen = document.getElementById('cinema-screen');
+    const playCenterBtn = document.getElementById('video-play-center-btn');
+    const playIcon = document.getElementById('center-play-icon');
+    const playBottomBtn = document.getElementById('video-play-btn');
+    const muteBtn = document.getElementById('video-mute-btn');
+    const volSlider = document.getElementById('video-vol-slider');
+    const speedBtn = document.getElementById('video-speed-btn');
+    const progressTrack = document.getElementById('video-progress-track');
+    const progressFill = document.getElementById('video-progress-fill');
+    const timeCurEl = document.getElementById('video-time-cur');
+    const timeTotEl = document.getElementById('video-time-tot');
+    const overlayTitle = document.getElementById('video-overlay-title');
+    const mainHeading = document.getElementById('video-main-heading');
+    const mainImg = document.getElementById('main-video-img');
+    const lateralList = document.getElementById('video-lateral-list');
+
+    if (cinemaScreen && lateralList) {
+      const mainSubtitleEl = document.getElementById('video-main-subtitle');
+      const countBadges = document.querySelectorAll('.js-video-count');
+      const speeds = [1.0, 1.25, 1.5, 0.75];
+      let speedIdx = 0;
+      let isPlaying = false;
+      let isMuted = false;
+      let currentSec = 0;
+      let totalSec = 765;
+      let timerId = null;
+      let currentMode = 'preview'; // 'preview' | 'video' | 'embed'
+      let videoEl = null;
+      let embedEl = null;
+
+      const parseDuration = (str) => {
+        const parts = String(str || '10:00').split(':').map(Number);
+        if (parts.length === 2 && !Number.isNaN(parts[0]) && !Number.isNaN(parts[1])) {
+          return parts[0] * 60 + parts[1];
+        }
+        return 600;
+      };
+
+      const fmtTime = (sec) => {
+        const safe = Math.max(0, Math.floor(sec));
+        const m = Math.floor(safe / 60);
+        const s = safe % 60;
+        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      };
+
+      const getEmbedUrl = (url) => {
+        if (!url) return null;
+        const ytWatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/);
+        if (ytWatch) return `https://www.youtube.com/embed/${ytWatch[1]}?autoplay=1&rel=0`;
+        const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+        if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1`;
+        return null;
+      };
+
+      const toggleCustomControls = (visible) => {
+        const controls = cinemaScreen.querySelector('.cinema-controls');
+        if (playCenterBtn) playCenterBtn.style.display = visible ? 'inline-flex' : 'none';
+        if (controls) controls.style.display = visible ? 'flex' : 'none';
+      };
+
+      const clearMedia = () => {
+        if (timerId) {
+          window.clearInterval(timerId);
+          timerId = null;
+        }
+        if (videoEl) {
+          videoEl.pause();
+          videoEl.remove();
+          videoEl = null;
+        }
+        if (embedEl) {
+          embedEl.remove();
+          embedEl = null;
+        }
+      };
+
+      const updateProgressUi = () => {
+        const dur = currentMode === 'video' && videoEl && videoEl.duration ? videoEl.duration : totalSec;
+        const cur = currentMode === 'video' && videoEl ? videoEl.currentTime : currentSec;
+        const pct = dur > 0 ? Math.min(100, Math.max(0, (cur / dur) * 100)) : 0;
+        if (progressFill) progressFill.style.width = `${pct}%`;
+        if (timeCurEl) timeCurEl.textContent = fmtTime(cur);
+        if (timeTotEl) timeTotEl.textContent = fmtTime(dur);
+      };
+
+      const setPlaying = (nextState) => {
+        if (currentMode === 'embed') return;
+        isPlaying = nextState;
+        cinemaScreen.classList.toggle('is-playing', isPlaying);
+        if (playIcon) playIcon.textContent = isPlaying ? '❚❚' : '▶';
+        if (playBottomBtn) playBottomBtn.textContent = isPlaying ? '❚❚' : '▶';
+
+        if (currentMode === 'video' && videoEl) {
+          if (isPlaying) videoEl.play().catch(() => {});
+          else videoEl.pause();
+          return;
+        }
+
+        if (timerId) {
+          window.clearInterval(timerId);
+          timerId = null;
+        }
+        if (isPlaying) {
+          timerId = window.setInterval(() => {
+            currentSec += speeds[speedIdx];
+            if (currentSec >= totalSec) {
+              currentSec = 0;
+              setPlaying(false);
+            }
+            updateProgressUi();
+          }, 1000);
+        }
+      };
+
+      const loadItem = (item, autoPlay) => {
+        if (!item) return;
+        const chapter = item.dataset.chapter || '';
+        const title = item.dataset.title || '';
+        const subtitle = item.dataset.subtitle || '';
+        const duration = item.dataset.duration || '10:00';
+        const thumb = item.dataset.thumb || '';
+        const src = (item.dataset.src || '').trim();
+
+        clearMedia();
+        currentSec = 0;
+        totalSec = parseDuration(duration);
+
+        if (overlayTitle) overlayTitle.textContent = chapter ? `${chapter}: ${title}` : title;
+        if (mainHeading) mainHeading.textContent = title;
+        if (mainSubtitleEl && subtitle) mainSubtitleEl.textContent = subtitle;
+        if (mainImg && thumb) {
+          mainImg.src = thumb;
+          mainImg.style.display = 'block';
+        }
+
+        lateralList.querySelectorAll('.cinema-playlist-item').forEach((el) => {
+          const active = el === item;
+          el.classList.toggle('is-active', active);
+          const statusEl = el.querySelector('.playlist-status');
+          if (statusEl) statusEl.textContent = active ? 'In riproduzione' : '';
+        });
+
+        const embedUrl = getEmbedUrl(src);
+        if (embedUrl) {
+          currentMode = 'embed';
+          toggleCustomControls(false);
+          embedEl = document.createElement('iframe');
+          embedEl.className = 'cinema-embed-frame';
+          embedEl.src = embedUrl;
+          embedEl.title = title || 'Video lezione';
+          embedEl.allow = 'autoplay; fullscreen; picture-in-picture';
+          embedEl.allowFullscreen = true;
+          cinemaScreen.appendChild(embedEl);
+          return;
+        }
+
+        toggleCustomControls(true);
+        if (src) {
+          currentMode = 'video';
+          videoEl = document.createElement('video');
+          videoEl.className = 'cinema-video-el';
+          videoEl.src = src;
+          videoEl.poster = thumb;
+          videoEl.playsInline = true;
+          videoEl.muted = isMuted;
+          videoEl.volume = volSlider ? Number(volSlider.value) / 100 : 0.8;
+          videoEl.playbackRate = speeds[speedIdx];
+          videoEl.addEventListener('timeupdate', updateProgressUi);
+          videoEl.addEventListener('loadedmetadata', updateProgressUi);
+          videoEl.addEventListener('ended', () => setPlaying(false));
+          cinemaScreen.insertBefore(videoEl, cinemaScreen.firstChild);
+        } else {
+          currentMode = 'preview';
+        }
+
+        updateProgressUi();
+        setPlaying(autoPlay);
+      };
+
+      const allItems = lateralList.querySelectorAll('.cinema-playlist-item');
+      countBadges.forEach((el) => {
+        el.textContent = `${allItems.length} Video`;
+      });
+
+      if (playCenterBtn) playCenterBtn.addEventListener('click', () => setPlaying(!isPlaying));
+      if (playBottomBtn) playBottomBtn.addEventListener('click', () => setPlaying(!isPlaying));
+
+      if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+          isMuted = !isMuted;
+          muteBtn.textContent = isMuted ? '🔇' : '🔊';
+          if (volSlider) volSlider.value = isMuted ? '0' : '80';
+          if (videoEl) videoEl.muted = isMuted;
+        });
+      }
+
+      if (volSlider && muteBtn) {
+        volSlider.addEventListener('input', () => {
+          const val = Number(volSlider.value);
+          isMuted = val === 0;
+          muteBtn.textContent = isMuted ? '🔇' : '🔊';
+          if (videoEl) {
+            videoEl.muted = isMuted;
+            videoEl.volume = val / 100;
+          }
+        });
+      }
+
+      if (speedBtn) {
+        speedBtn.addEventListener('click', () => {
+          speedIdx = (speedIdx + 1) % speeds.length;
+          speedBtn.textContent = `${speeds[speedIdx]}x`;
+          if (videoEl) videoEl.playbackRate = speeds[speedIdx];
+        });
+      }
+
+      if (progressTrack) {
+        progressTrack.addEventListener('click', (e) => {
+          const rect = progressTrack.getBoundingClientRect();
+          const ratio = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+          if (currentMode === 'video' && videoEl && videoEl.duration) {
+            videoEl.currentTime = ratio * videoEl.duration;
+          } else {
+            currentSec = Math.round(ratio * totalSec);
+          }
+          updateProgressUi();
+        });
+      }
+
+      lateralList.addEventListener('click', (e) => {
+        const item = e.target.closest('.cinema-playlist-item');
+        if (item) loadItem(item, true);
+      });
+
+      const initialItem = lateralList.querySelector('.cinema-playlist-item.is-active') || allItems[0];
+      if (initialItem) loadItem(initialItem, false);
+    }
+
+    // J. Polaroid Audio Button
+    const polaroidBtn = document.getElementById('polaroid-audio-btn');
+    if (polaroidBtn) {
+      polaroidBtn.addEventListener('click', () => {
+        speakEnglish('A flat white and a warm fruit scone, please!', {
+          onStart: () => { polaroidBtn.textContent = 'Audio...'; },
+          onEnd: () => { polaroidBtn.textContent = 'Ascolta'; },
+        });
+      });
+    }
   }
 
   function initQuizPage() {

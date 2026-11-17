@@ -367,6 +367,289 @@
               </button>
             </div>
           </article>
+
+          <!-- I. VIDEO PLAYER CON PLAYLIST LATERALE (4x1) -->
+          <section id="cinema-video-card" class="cinema-card span-4x1" aria-labelledby="video-main-heading">
+            <div class="cinema-bezel-bar">
+              <div class="meta-line" style="color: #cbd5e1;">
+                <span style="font-family: var(--font-mono); font-weight: 800; color: #f8fafc;">
+                  Video Studio · Lezioni in Inglese
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>HD Studio Player</span>
+              </div>
+              <span class="js-video-count" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: #fda4af;">
+                4 Video
+              </span>
+            </div>
+
+            <div class="cinema-layout">
+              <!-- Schermo Video Principale -->
+              <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem;">
+                <div id="cinema-screen" class="cinema-screen">
+                  <img
+                    id="main-video-img"
+                    src="/assets/images/london-coffee-shop.jpg"
+                    alt="Anteprima lezione video in inglese"
+                    referrerpolicy="no-referrer"
+                    onerror="this.style.display='none';"
+                  />
+                  <div class="cinema-scrim"></div>
+
+                  <div class="cinema-overlay-title">
+                    <span id="video-overlay-title" class="cinema-chapter-label">
+                      Capitolo 02: Inglese Quotidiano nei Caffè di Londra
+                    </span>
+                  </div>
+
+                  <button
+                    id="video-play-center-btn"
+                    type="button"
+                    class="cinema-center-play"
+                    aria-label="Riproduci o metti in pausa video"
+                  >
+                    <span id="center-play-icon">▶</span>
+                  </button>
+
+                  <div class="cinema-controls">
+                    <div class="cinema-scrubber-row">
+                      <span id="video-time-cur" class="tabular-nums">00:00</span>
+                      <div id="video-progress-track" class="cinema-progress-track" role="slider" aria-label="Avanzamento video">
+                        <div id="video-progress-fill" class="cinema-progress-fill"></div>
+                      </div>
+                      <span id="video-time-tot" class="tabular-nums">12:45</span>
+                    </div>
+
+                    <div class="cinema-buttons-row">
+                      <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <button id="video-play-btn" type="button" class="cinema-icon-btn" aria-label="Play o Pausa">▶</button>
+                        <button id="video-mute-btn" type="button" class="cinema-icon-btn" aria-label="Muto o Audio">🔊</button>
+                        <input id="video-vol-slider" type="range" min="0" max="100" value="80" class="cinema-volume-slider" aria-label="Volume" />
+                      </div>
+                      <button id="video-speed-btn" type="button" class="cinema-icon-btn" style="font-family: var(--font-mono);">
+                        1.0x
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0 0.25rem;">
+                  <div>
+                    <h2 id="video-main-heading" style="font-size: 1.0625rem; font-weight: 800; color: #ffffff;">
+                      Inglese Quotidiano nei Caffè di Londra
+                    </h2>
+                    <p id="video-main-subtitle" style="font-size: 0.8125rem; color: #94a3b8;">
+                      Corso pratico di ascolto e pronuncia · Livello B1
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Playlist Laterale -->
+              <!-- Per cambiare un video, modifica data-title, data-chapter, data-duration, data-thumb e data-src (link YouTube, Vimeo o file .mp4) -->
+              <div class="cinema-playlist-panel">
+                <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                  <span style="font-size: 0.8125rem; font-weight: 800; color: #f8fafc;">Playlist Lezioni</span>
+                  <span class="js-video-count" style="font-family: var(--font-mono); font-size: 0.75rem; color: #94a3b8;">4 Video</span>
+                </div>
+
+                <div id="video-lateral-list" class="cinema-playlist-list">
+                  <button
+                    type="button"
+                    class="cinema-playlist-item"
+                    data-chapter="Capitolo 01"
+                    data-title="Pronuncia Britannica &amp; Accento RP"
+                    data-subtitle="Fonetica inglese essenziale · Livello A2-B1"
+                    data-duration="08:20"
+                    data-thumb="/assets/images/london-mews.jpg"
+                    data-src=""
+                  >
+                    <div class="cinema-thumb">
+                      <img src="/assets/images/london-mews.jpg" alt="Capitolo 01" referrerpolicy="no-referrer" />
+                      <span class="cinema-thumb-dur">08:20</span>
+                    </div>
+                    <div style="min-width: 0; flex: 1;">
+                      <div style="font-family: var(--font-mono); font-size: 0.6875rem; color: #94a3b8; display: flex; justify-content: space-between;">
+                        <span>Capitolo 01</span>
+                        <span class="playlist-status" style="color: #fda4af;"></span>
+                      </div>
+                      <div style="font-size: 0.8125rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        Pronuncia Britannica &amp; Accento RP
+                      </div>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="cinema-playlist-item is-active"
+                    data-chapter="Capitolo 02"
+                    data-title="Inglese Quotidiano nei Caffè di Londra"
+                    data-subtitle="Corso pratico di ascolto e pronuncia · Livello B1"
+                    data-duration="12:45"
+                    data-thumb="/assets/images/london-coffee-shop.jpg"
+                    data-src=""
+                  >
+                    <div class="cinema-thumb">
+                      <img src="/assets/images/london-coffee-shop.jpg" alt="Capitolo 02" referrerpolicy="no-referrer" />
+                      <span class="cinema-thumb-dur">12:45</span>
+                    </div>
+                    <div style="min-width: 0; flex: 1;">
+                      <div style="font-family: var(--font-mono); font-size: 0.6875rem; color: #fda4af; display: flex; justify-content: space-between;">
+                        <span>Capitolo 02</span>
+                        <span class="playlist-status">In riproduzione</span>
+                      </div>
+                      <div style="font-size: 0.8125rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        Inglese Quotidiano nei Caffè di Londra
+                      </div>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="cinema-playlist-item"
+                    data-chapter="Capitolo 03"
+                    data-title="Condizionali &amp; Strutture B2-C1"
+                    data-subtitle="Grammatica avanzata e inversione · Livello B2-C1"
+                    data-duration="15:10"
+                    data-thumb="/assets/images/oxford-library.jpg"
+                    data-src=""
+                  >
+                    <div class="cinema-thumb">
+                      <img src="/assets/images/oxford-library.jpg" alt="Capitolo 03" referrerpolicy="no-referrer" />
+                      <span class="cinema-thumb-dur">15:10</span>
+                    </div>
+                    <div style="min-width: 0; flex: 1;">
+                      <div style="font-family: var(--font-mono); font-size: 0.6875rem; color: #94a3b8; display: flex; justify-content: space-between;">
+                        <span>Capitolo 03</span>
+                        <span class="playlist-status" style="color: #fda4af;"></span>
+                      </div>
+                      <div style="font-size: 0.8125rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        Condizionali &amp; Strutture B2-C1
+                      </div>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="cinema-playlist-item"
+                    data-chapter="Capitolo 04"
+                    data-title="Conversazione Formale a Oxford"
+                    data-subtitle="Dibattito accademico e registro formale · Livello C1"
+                    data-duration="18:30"
+                    data-thumb="/assets/images/london-mews.jpg"
+                    data-src=""
+                  >
+                    <div class="cinema-thumb">
+                      <img src="/assets/images/london-mews.jpg" alt="Capitolo 04" referrerpolicy="no-referrer" />
+                      <span class="cinema-thumb-dur">18:30</span>
+                    </div>
+                    <div style="min-width: 0; flex: 1;">
+                      <div style="font-family: var(--font-mono); font-size: 0.6875rem; color: #94a3b8; display: flex; justify-content: space-between;">
+                        <span>Capitolo 04</span>
+                        <span class="playlist-status" style="color: #fda4af;"></span>
+                      </div>
+                      <div style="font-size: 0.8125rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        Conversazione Formale a Oxford
+                      </div>
+                    </div>
+                  </button>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #94a3b8; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08);">
+                  <span>Riproduzione playlist</span>
+                  <span style="color: #34d399; font-weight: 700;">Pronto</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cinema-stand" aria-hidden="true">
+              <div class="cinema-stand-neck"></div>
+              <div class="cinema-stand-foot"></div>
+            </div>
+          </section>
+
+          <!-- J. CARD LINK AL BLOG (2x1) -->
+          <!-- Sostituisci href="/pages/cultura.html" con l'URL del tuo blog -->
+          <article class="bento-card card-white span-2x1">
+            <div>
+              <div class="meta-line">
+                <span>English Journal &amp; Blog</span>
+                <span aria-hidden="true">·</span>
+                <span>Articoli Settimanali</span>
+                <span aria-hidden="true">·</span>
+                <span>5 min di lettura</span>
+              </div>
+
+              <h2 class="card-title" style="font-size: 1.375rem; margin-top: 0.75rem;">
+                Come pensare direttamente in inglese senza tradurre parola per parola
+              </h2>
+
+              <p style="font-size: 0.9375rem; color: var(--ink-secondary); margin-top: 0.5rem; line-height: 1.55;">
+                Strategie pratiche di lettura immersiva, blocchi lessicali ad alta frequenza e piccoli rituali quotidiani per acquisire naturalezza.
+              </p>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.875rem; border-top: 1px solid var(--border-subtle); flex-wrap: wrap;">
+              <span style="font-size: 0.8125rem; font-weight: 600; color: var(--ink-muted);">
+                Nuovi approfondimenti su cultura, idiomi e pronuncia
+              </span>
+              <a href="/pages/cultura.html" class="btn btn-amber">
+                Vai al Blog →
+              </a>
+            </div>
+          </article>
+
+          <!-- K. CARD POLAROID PICCOLA CON FOTO, DESCRIZIONE E BOTTONCINO (1x1) -->
+          <article class="polaroid-card span-1x1">
+            <div class="polaroid-photo">
+              <img
+                src="/assets/images/oxford-library.jpg"
+                alt="Biblioteca storica di Oxford con libri aperti"
+                referrerpolicy="no-referrer"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="image-fallback" style="display: none;">
+                <span>Oxford Study Hall</span>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <div>
+                <h2 class="card-title" style="font-size: 1rem;">Soho &amp; Oxford Notes</h2>
+                <p style="font-size: 0.8125rem; color: var(--ink-muted); margin-top: 0.25rem; line-height: 1.4;">
+                  Una foto al giorno con una frase autentica da ascoltare e memorizzare.
+                </p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+                <button type="button" id="polaroid-audio-btn" class="btn-audio-icon" style="min-height: 36px;">
+                  Ascolta
+                </button>
+                <a href="/pages/cultura.html" class="card-link-action" style="min-height: 36px;">
+                  Altre →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- L. FRAME SMARTPHONE 9:16 CON DYNAMIC ISLAND PER IFRAME (1x1) -->
+          <!-- Sostituisci srcdoc con src="https://tuo-link-iframe" per mostrare una pagina esterna -->
+          <article class="phone-card span-1x1" aria-label="Anteprima mobile in iframe">
+            <div class="phone-status-bar">
+              <span style="font-weight: 800; color: #ffffff;">09:41</span>
+              <div class="phone-dynamic-island" aria-hidden="true"></div>
+              <span>5G 100%</span>
+            </div>
+
+            <div class="phone-screen">
+              <iframe
+                class="phone-iframe"
+                title="Contenuto mobile English Hub"
+                srcdoc="<!doctype html><html lang='it'><body style='margin:0;padding:18px;font-family:system-ui,sans-serif;background:#0f172a;color:#f8fafc;display:flex;flex-direction:column;justify-content:space-between;min-height:calc(100vh - 36px);box-sizing:border-box;'><div style='display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e293b;padding-bottom:8px;font-size:11px;font-family:monospace;color:#fbbf24;font-weight:700;'><span>ENGLISH FEED</span><span>LIVE</span></div><div style='text-align:center;margin:auto 0;padding:12px 0;'><div style='width:52px;height:52px;border-radius:14px;background:#fbbf24;color:#0f172a;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;'>★</div><h3 style='margin:0 0 6px;font-size:15px;font-weight:800;'>Contenuto Iframe</h3><p style='margin:0;font-size:12px;line-height:1.5;color:#94a3b8;'>Incornicia le tue viste o pagine esterne in un vero dispositivo 9:16.</p></div><a href='/pages/quiz.html' target='_top' style='display:block;text-align:center;padding:10px 12px;background:#fbbf24;color:#0f172a;font-weight:800;font-size:12px;border-radius:10px;text-decoration:none;'>Apri Quiz →</a></body></html>"
+              ></iframe>
+            </div>
+
+            <div class="phone-home-indicator" aria-hidden="true"></div>
+          </article>
         </main>
 
         <!-- 3. FOOTER HTML INDIPENDENTE -->
