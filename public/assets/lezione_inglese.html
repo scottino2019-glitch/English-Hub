@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inglese - Livello A1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root {
+            --bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #5e5e5e;
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+            --border: #e5e7eb;
+            --card-bg: #f9fafb;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif; 
+            line-height: 1.7; 
+            max-width: 850px; 
+            margin: 0 auto; 
+            padding: 60px 40px; 
+            background-color: var(--bg); 
+            color: var(--text-main);
+            -webkit-print-color-adjust: exact;
+        }
+
+        .header-main {
+            text-align: center;
+            border-bottom: 3px solid var(--text-main);
+            padding-bottom: 30px;
+            margin-bottom: 60px;
+        }
+
+        .header-main h1 { 
+            font-size: 3rem; 
+            margin: 0; 
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .chapter { 
+            margin-bottom: 100px;
+            page-break-before: always;
+        }
+
+        .chapter:first-of-type { page-break-before: auto; }
+
+        .chapter-header {
+            margin-bottom: 40px;
+        }
+
+        .chapter-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .difficulty-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-weight: 700;
+            margin-top: 10px;
+            letter-spacing: 0.05em;
+        }
+
+        h2 { 
+            font-size: 1.4rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .section { margin: 40px 0; }
+
+        /* Dialogue Style */
+        .dialogue-container {
+            margin: 20px 0;
+        }
+        .dialogue-item {
+            margin-bottom: 24px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .dialogue-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+        .speaker-name {
+            display: block;
+            font-weight: 800;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .text-foreign {
+            font-family: 'Lora', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 6px;
+        }
+        .text-translation {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        /* Vocabulary Table-like Grid */
+        .vocab-list {
+            display: grid;
+            gap: 15px;
+        }
+        .vocab-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .vocab-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+        .word { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+        .phon { font-family: monospace; color: var(--text-muted); font-size: 0.9rem; }
+        .transl { font-weight: 600; color: var(--text-main); }
+        .example-sentence {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Grammar Box */
+        .grammar-card {
+            border: 2px solid var(--text-main);
+            padding: 30px;
+            border-radius: 4px;
+            margin: 30px 0;
+        }
+        .grammar-card h3 { margin-top: 0; font-size: 1.5rem; }
+        .grammar-card p { font-size: 1.05rem; }
+        .grammar-list { padding-left: 20px; margin-top: 20px; }
+        .grammar-list li { margin-bottom: 12px; font-family: 'Lora', serif; font-style: italic; }
+
+        /* Exercises Section */
+        .exercise-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        .ex-label {
+            display: inline-block;
+            background: var(--text-main);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .ex-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .ex-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .ex-option {
+            padding: 12px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ex-option:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .ex-option.correct {
+            background: #dcfce7;
+            border-color: #22c55e;
+            color: #166534;
+        }
+        .ex-option.wrong {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .ex-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .ex-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        .ex-check-btn {
+            background: var(--text-main);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .ex-feedback {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ex-solution-text {
+            color: var(--text-main);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .ex-explanation-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .answer-key { 
+            display: none; 
+        }
+
+        @media print { 
+            body { padding: 40px; }
+            .chapter { border: none; } 
+            .exercise-item { box-shadow: none; border: 1px solid #ddd; }
+            .answer-key { display: block; }
+            .ex-check-btn, .ex-input { display: none; }
+        }
+    </style>
+    <script>
+        function checkOption(el, correctAnswer) {
+            const container = el.closest('.exercise-item');
+            if (container.classList.contains('answered')) return;
+            
+            const options = container.querySelectorAll('.ex-option');
+            const feedback = container.querySelector('.ex-feedback');
+            
+            container.classList.add('answered');
+            
+            if (el.innerText.trim() === correctAnswer.trim()) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                // Find and highlight correct one
+                options.forEach(opt => {
+                    if (opt.innerText.trim() === correctAnswer.trim()) opt.classList.add('correct');
+                });
+            }
+            
+            feedback.style.display = 'block';
+        }
+
+        function checkInput(input, correctAnswer) {
+            const container = input.closest('.exercise-item');
+            if (container.classList.contains('answered')) return;
+            
+            const feedback = container.querySelector('.ex-feedback');
+            container.classList.add('answered');
+            
+            const isCorrect = input.value.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
+            input.style.borderColor = isCorrect ? '#22c55e' : '#ef4444';
+            input.style.backgroundColor = isCorrect ? '#dcfce7' : '#fee2e2';
+            
+            feedback.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+        <div class="header-main">
+            <h1>Inglese - Livello A1</h1>
+            <p style="color: var(--text-muted); font-weight: 600;">Materiale Didattico Professionale</p>
+        </div>
+        
+    <article class="chapter">
+      <header class="chapter-header">
+        <h2 class="chapter-title">Capitolo 1: In giro per Londra</h2>
+        <span class="difficulty-tag">A1 - Principiante</span>
+      </header>
+      
+      <section class="section">
+        <h2>Dialogo Immersivo</h2>
+        <div class="dialogue-container">
+          
+            <div class="dialogue-item">
+              <span class="speaker-name">Marco</span>
+              <span class="text-foreign">"Excuse me, where is the Underground station?"</span>
+              <span class="text-translation">Mi scusi, dov'è la stazione della metropolitana?</span>
+            </div>
+          
+            <div class="dialogue-item">
+              <span class="speaker-name">Sarah</span>
+              <span class="text-foreign">"Go straight on and turn left. It is opposite the museum."</span>
+              <span class="text-translation">Vada dritto e giri a sinistra. È di fronte al museo.</span>
+            </div>
+          
+            <div class="dialogue-item">
+              <span class="speaker-name">Marco</span>
+              <span class="text-foreign">"Thank you! Is it far from here?"</span>
+              <span class="text-translation">Grazie! È lontano da qui?</span>
+            </div>
+          
+            <div class="dialogue-item">
+              <span class="speaker-name">Sarah</span>
+              <span class="text-foreign">"No, it is only a five-minute walk."</span>
+              <span class="text-translation">No, sono solo cinque minuti a piedi.</span>
+            </div>
+          
+            <div class="dialogue-item">
+              <span class="speaker-name">Marco</span>
+              <span class="text-foreign">"Great, have a nice day!"</span>
+              <span class="text-translation">Ottimo, buona giornata!</span>
+            </div>
+          
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Vocabolario Essenziale</h2>
+        <div class="vocab-list">
+          
+            <div class="vocab-card">
+              <div class="vocab-head">
+                <span class="word">Underground</span>
+                <span class="phon">[/ˈʌndəɡraʊnd/]</span>
+                <span class="transl">Metropolitana</span>
+              </div>
+              <div class="example-sentence">
+                <strong>Contesto:</strong> Take the Underground to reach the centre.
+              </div>
+            </div>
+          
+            <div class="vocab-card">
+              <div class="vocab-head">
+                <span class="word">Turn left</span>
+                <span class="phon">[/tɜːn lɛft/]</span>
+                <span class="transl">Gira a sinistra / Giri a sinistra</span>
+              </div>
+              <div class="example-sentence">
+                <strong>Contesto:</strong> Turn left at the traffic lights.
+              </div>
+            </div>
+          
+            <div class="vocab-card">
+              <div class="vocab-head">
+                <span class="word">Turn right</span>
+                <span class="phon">[/tɜːn raɪt/]</span>
+                <span class="transl">Gira a destra / Giri a destra</span>
+              </div>
+              <div class="example-sentence">
+                <strong>Contesto:</strong> Turn right after the bank.
+              </div>
+            </div>
+          
+            <div class="vocab-card">
+              <div class="vocab-head">
+                <span class="word">Straight on</span>
+                <span class="phon">[/streɪt ɒn/]</span>
+                <span class="transl">Dritto</span>
+              </div>
+              <div class="example-sentence">
+                <strong>Contesto:</strong> Go straight on for two hundred metres.
+              </div>
+            </div>
+          
+            <div class="vocab-card">
+              <div class="vocab-head">
+                <span class="word">Opposite</span>
+                <span class="phon">[/ˈɒpəzɪt/]</span>
+                <span class="transl">Di fronte a</span>
+              </div>
+              <div class="example-sentence">
+                <strong>Contesto:</strong> The bus stop is opposite the hotel.
+              </div>
+            </div>
+          
+            <div class="vocab-card">
+              <div class="vocab-head">
+                <span class="word">Bus stop</span>
+                <span class="phon">[/bʌs stɒp/]</span>
+                <span class="transl">Fermata dell'autobus</span>
+              </div>
+              <div class="example-sentence">
+                <strong>Contesto:</strong> Wait for me at the bus stop.
+              </div>
+            </div>
+          
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Approfondimento Grammaticale</h2>
+        <div class="grammar-card">
+          <h3>Chiedere informazioni con 'Where is...?'</h3>
+          <p>Per chiedere dove si trova un luogo singolare a Londra o in qualsiasi città, usiamo l'espressione 'Where is...?' seguita dall'articolo 'the' e dal nome del luogo. Al plurale usiamo 'Where are...?'. Per iniziare la frase in modo educato, si premette quasi sempre 'Excuse me' (Mi scusi).</p>
+          <ul class="grammar-list">
+            <li>"Excuse me, where is Big Ben?"</li><li>"Where is the nearest pharmacy?"</li><li>"Where are the ticket machines?"</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Esercizi Interattivi</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          Clicca sulle opzioni o inserisci la risposta per verificare la tua conoscenza.
+        </p>
+        <div class="exercises-container">
+          
+            <div class="exercise-item" id="ex-0-0" data-answer="Excuse me, where is the museum?">
+              <span class="ex-label">Esercizio 1.1 &bull; multiple choice</span>
+              <div class="ex-question">Quale frase useresti per chiedere educatamente a un passante dov'è il museo?</div>
+              
+              
+                <div class="ex-options">
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'Excuse me, where is the museum?')">Excuse me, where is the museum?</div>
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'Excuse me, where is the museum?')">Please, what is the museum?</div>
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'Excuse me, where is the museum?')">Excuse me, where are museum?</div>
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'Excuse me, where is the museum?')">Tell me the museum now.</div>
+                  
+                </div>
+              
+
+              <div class="ex-feedback" style="display: none;">
+                <div class="ex-solution-text">
+                  <strong>Risposta Corretta:</strong> <span class="correct-val">Excuse me, where is the museum?</span>
+                </div>
+                <div class="ex-explanation-text">'Excuse me, where is...' è la forma corretta ed educata per chiedere dove si trova un luogo singolare.</div>
+              </div>
+            </div>
+          
+            <div class="exercise-item" id="ex-0-1" data-answer="straight">
+              <span class="ex-label">Esercizio 1.2 &bull; multiple choice</span>
+              <div class="ex-question">Scegli l'opzione corretta per completare la frase: 'To go to the park, go _____ on and turn right.'</div>
+              
+              
+                <div class="ex-options">
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'straight')">straight</div>
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'straight')">right</div>
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'straight')">left</div>
+                  
+                    <div class="ex-option" onclick="checkOption(this, 'straight')">direct</div>
+                  
+                </div>
+              
+
+              <div class="ex-feedback" style="display: none;">
+                <div class="ex-solution-text">
+                  <strong>Risposta Corretta:</strong> <span class="correct-val">straight</span>
+                </div>
+                <div class="ex-explanation-text">L'espressione comune per dire 'vai dritto' in inglese britannico è 'go straight on'.</div>
+              </div>
+            </div>
+          
+            <div class="exercise-item" id="ex-0-2" data-answer="next">
+              <span class="ex-label">Esercizio 1.3 &bull; fill in the blank</span>
+              <div class="ex-question">Completa la frase con la preposizione corretta che significa 'accanto a': 'The hotel is _____ to the tube station.'</div>
+              
+              
+                <div class="ex-input-group">
+                  <input type="text" class="ex-input" placeholder="Scrivi la tua risposta qui..." onkeypress="if(event.key === 'Enter') checkInput(this, 'next')">
+                  <button class="ex-check-btn" onclick="checkInput(this.previousElementSibling, 'next')">Controlla</button>
+                </div>
+              
+
+              <div class="ex-feedback" style="display: none;">
+                <div class="ex-solution-text">
+                  <strong>Risposta Corretta:</strong> <span class="correct-val">next</span>
+                </div>
+                <div class="ex-explanation-text">La locuzione prepositiva corretta per 'accanto a' è 'next to'.</div>
+              </div>
+            </div>
+          
+            <div class="exercise-item" id="ex-0-3" data-answer="Turn left.">
+              <span class="ex-label">Esercizio 1.4 &bull; translation</span>
+              <div class="ex-question">Traduci la seguente frase in inglese: 'Gira a sinistra.'</div>
+              
+              
+                <div class="ex-input-group">
+                  <input type="text" class="ex-input" placeholder="Scrivi la tua risposta qui..." onkeypress="if(event.key === 'Enter') checkInput(this, 'Turn left.')">
+                  <button class="ex-check-btn" onclick="checkInput(this.previousElementSibling, 'Turn left.')">Controlla</button>
+                </div>
+              
+
+              <div class="ex-feedback" style="display: none;">
+                <div class="ex-solution-text">
+                  <strong>Risposta Corretta:</strong> <span class="correct-val">Turn left.</span>
+                </div>
+                <div class="ex-explanation-text">Si usa la forma imperativa del verbo 'to turn' seguita dalla direzione 'left'.</div>
+              </div>
+            </div>
+          
+            <div class="exercise-item" id="ex-0-4" data-answer="Where is the station?">
+              <span class="ex-label">Esercizio 1.5 &bull; translation</span>
+              <div class="ex-question">Traduci la seguente frase in inglese: 'Dov'è la stazione?'</div>
+              
+              
+                <div class="ex-input-group">
+                  <input type="text" class="ex-input" placeholder="Scrivi la tua risposta qui..." onkeypress="if(event.key === 'Enter') checkInput(this, 'Where is the station?')">
+                  <button class="ex-check-btn" onclick="checkInput(this.previousElementSibling, 'Where is the station?')">Controlla</button>
+                </div>
+              
+
+              <div class="ex-feedback" style="display: none;">
+                <div class="ex-solution-text">
+                  <strong>Risposta Corretta:</strong> <span class="correct-val">Where is the station?</span>
+                </div>
+                <div class="ex-explanation-text">'Where is' si usa per domandare la posizione di un elemento singolare determinato da 'the'.</div>
+              </div>
+            </div>
+          
+        </div>
+      </section>
+    </article>
+  
+        
+    <section class="answer-key" style="page-break-before: always; margin-top: 100px;">
+      <h2 style="font-size: 2rem; border-bottom: 3px solid var(--text-main); padding-bottom: 15px;">Chiave delle Risposte</h2>
+      <p style="margin-bottom: 30px; color: var(--text-muted);">Usa questa sezione per verificare il tuo lavoro dopo aver completato gli esercizi.</p>
+      
+      
+        <div style="margin-bottom: 40px;">
+          <h3 style="color: var(--accent); margin-bottom: 15px;">Capitolo 1: In giro per Londra</h3>
+          <div style="display: grid; gap: 15px;">
+            
+              <div style="padding: 15px; background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border);">
+                <div style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">
+                  Es. 1.1
+                </div>
+                <div style="font-weight: 600;">Risposta: <span style="color: var(--accent);">Excuse me, where is the museum?</span></div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">'Excuse me, where is...' è la forma corretta ed educata per chiedere dove si trova un luogo singolare.</div>
+              </div>
+            
+              <div style="padding: 15px; background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border);">
+                <div style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">
+                  Es. 1.2
+                </div>
+                <div style="font-weight: 600;">Risposta: <span style="color: var(--accent);">straight</span></div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">L'espressione comune per dire 'vai dritto' in inglese britannico è 'go straight on'.</div>
+              </div>
+            
+              <div style="padding: 15px; background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border);">
+                <div style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">
+                  Es. 1.3
+                </div>
+                <div style="font-weight: 600;">Risposta: <span style="color: var(--accent);">next</span></div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">La locuzione prepositiva corretta per 'accanto a' è 'next to'.</div>
+              </div>
+            
+              <div style="padding: 15px; background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border);">
+                <div style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">
+                  Es. 1.4
+                </div>
+                <div style="font-weight: 600;">Risposta: <span style="color: var(--accent);">Turn left.</span></div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Si usa la forma imperativa del verbo 'to turn' seguita dalla direzione 'left'.</div>
+              </div>
+            
+              <div style="padding: 15px; background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border);">
+                <div style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">
+                  Es. 1.5
+                </div>
+                <div style="font-weight: 600;">Risposta: <span style="color: var(--accent);">Where is the station?</span></div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">'Where is' si usa per domandare la posizione di un elemento singolare determinato da 'the'.</div>
+              </div>
+            
+          </div>
+        </div>
+      
+    </section>
+  
+        <footer>
+          Documento generato da LinguaCraft AI • Strumenti per l'eccellenza nell'apprendimento
+        </footer>
+    </div>
+</body>
+</html>
+  
